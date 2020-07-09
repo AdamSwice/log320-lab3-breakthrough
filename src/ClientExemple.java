@@ -1,15 +1,17 @@
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 
 
 class ClientExemple {
+    private String opponentPlay;
     public static void main(String[] args) {
 
         Socket MyClient;
         BufferedInputStream input;
         BufferedOutputStream output;
-        int[][] board = new int[8][8];
-
+        Board board;
+        Strategy strategy = new Strategy(new Board("1"));
         try {
             MyClient = new Socket("localhost", 8888);
 
@@ -30,21 +32,13 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    String[] boardValues;
-                    boardValues = s.split(" ");
-                    int x=0,y=0;
-                    for(int i=0; i<boardValues.length;i++){
-                        board[x][y] = Integer.parseInt(boardValues[i]);
-                        x++;
-                        if(x == 8){
-                            x = 0;
-                            y++;
-                        }
-                    }
-
+                    board = new Board(s);
+                    strategy = new Strategy(board);
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                     String move = null;
                     move = console.readLine();
+
+
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
                 }
@@ -58,17 +52,8 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    String[] boardValues;
-                    boardValues = s.split(" ");
-                    int x=0,y=0;
-                    for(int i=0; i<boardValues.length;i++){
-                        board[x][y] = Integer.parseInt(boardValues[i]);
-                        x++;
-                        if(x == 8){
-                            x = 0;
-                            y++;
-                        }
-                    }
+                    board = new Board(s);
+                    strategy = new Strategy(board);
                 }
 
 
@@ -84,11 +69,11 @@ class ClientExemple {
                     String s = new String(aBuffer);
                     System.out.println("Dernier coup :"+ s);
                     System.out.println("Entrez votre coup : ");
+                    strategy.coupAdversaire(s);
                     String move = null;
                     move = console.readLine();
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
-
                 }
                 // Le dernier coup est invalide
                 if(cmd == '4'){
