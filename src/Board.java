@@ -29,7 +29,7 @@ public class Board {
     }
 
 
-    private boolean isValidLocation(int row, int column) {
+    public boolean isValidLocation(int row, int column) {
         if (row < 0 || row >= 8 || column < 0 || column >= 8){
             return false;
         } else {
@@ -37,7 +37,7 @@ public class Board {
         }
     }
 
-    private boolean isMoveValid(int fromRow, int fromColumn, int toRow, int toColumn){
+    public boolean isMoveValid(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
         //Checking if locations from and to are valid in the first place
         if(!isValidLocation(fromRow, fromColumn) || isValidLocation(toRow, toColumn)){
             return false;
@@ -49,7 +49,7 @@ public class Board {
         }
         int piece = getPieceAt(fromRow, fromColumn);
         //Checking if movement options are valid as black (2)
-        if (piece == BLACK && playerType == BLACK){
+        if (piece == BLACK && playerColor == BLACK){
             if (toRow != fromRow + 1){
                  return false;
             } else if (getPieceAt(toRow, toColumn) == 0){
@@ -57,7 +57,7 @@ public class Board {
             } else if (getPieceAt(toRow, toColumn) == RED && toColumn != fromColumn) {
                 return true;
             }
-        } else if (piece == RED && playerType == RED){
+        } else if (piece == RED && playerColor == RED){
             if ( toRow != fromRow +1){
                 return false;
             } else if (getPieceAt(toRow, toColumn) == 0){
@@ -69,8 +69,8 @@ public class Board {
         return false;
     }
 
-    public void move(int fromRow, int fromColumn, int toRow, int toColumn){
-        if (isMoveValid(fromRow, fromColumn, toRow, toColumn)){
+    public void move(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
+        if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
             board[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
             board[fromRow][fromColumn] = EMPTY;
             //didIwin();
