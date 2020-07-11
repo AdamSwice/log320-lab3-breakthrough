@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 class ClientExemple {
@@ -12,6 +14,10 @@ class ClientExemple {
         BufferedOutputStream output;
         Board board;
         Strategy strategy = new Strategy(new Board("1", 0));
+        Map<String, Integer> opponentMove = new HashMap<>();
+        int opponentColor = 0;
+
+        Utilitaire util = new Utilitaire();
         try {
             MyClient = new Socket("localhost", 8888);
 
@@ -34,6 +40,7 @@ class ClientExemple {
                     System.out.println(s);
                     board = new Board(s, 2);
                     strategy = new Strategy(board);
+                    opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                     String move = null;
                     move = console.readLine();
@@ -54,6 +61,7 @@ class ClientExemple {
                     System.out.println(s);
                     board = new Board(s, 4);
                     strategy = new Strategy(board);
+                    opponentColor = 4;
                 }
 
 
@@ -68,6 +76,8 @@ class ClientExemple {
 
                     String s = new String(aBuffer);
                     System.out.println("Dernier coup :"+ s);
+                    opponentMove = util.getConvertedMoveValues(s);
+                    strategy.getBoard().move(opponentMove.get("fromRow"),opponentMove.get("fromColumn"), opponentMove.get("toRow"), opponentMove.get("toColumn"), opponentColor);
                     System.out.println("Entrez votre coup : ");
                     strategy.coupAdversaire(s);
                     String move = null;
