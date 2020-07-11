@@ -12,7 +12,10 @@ public class Strategy {
 
     //TODO: Generateur de mouvements
     public void executeMove(){
-
+//        minmaxTree = Minimax(this.board);
+//        decisions = minmaxTree.getValue();
+//        destination = decisions[0];
+//        moveDirection = decisions[1];
     }
 
     public Board getBoard() {

@@ -11,7 +11,7 @@ class ClientExemple {
         BufferedInputStream input;
         BufferedOutputStream output;
         Board board;
-        Strategy strategy = new Strategy(new Board("1"));
+        Strategy strategy = new Strategy(new Board("1", 0));
         try {
             MyClient = new Socket("localhost", 8888);
 
@@ -32,7 +32,7 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    board = new Board(s);
+                    board = new Board(s, 2);
                     strategy = new Strategy(board);
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                     String move = null;
@@ -52,7 +52,7 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    board = new Board(s);
+                    board = new Board(s, 4);
                     strategy = new Strategy(board);
                 }
 
