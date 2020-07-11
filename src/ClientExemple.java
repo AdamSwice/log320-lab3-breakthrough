@@ -15,6 +15,7 @@ class ClientExemple {
         Board board;
         Strategy strategy = new Strategy(new Board("1", 0));
         Map<String, Integer> opponentMove = new HashMap<>();
+        Map<String, Integer> myMove = new HashMap<>();
         int opponentColor = 0;
 
         Utilitaire util = new Utilitaire();
@@ -38,7 +39,7 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    board = new Board(s, 2);
+                    board = new Board(s, 4);
                     strategy = new Strategy(board);
                     opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
@@ -59,7 +60,7 @@ class ClientExemple {
                     input.read(aBuffer,0,size);
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
-                    board = new Board(s, 4);
+                    board = new Board(s, 2);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }
@@ -83,6 +84,8 @@ class ClientExemple {
                     strategy.coupAdversaire(s);
                     String move = null;
                     move = console.readLine();
+                    myMove = util.getConvertedMoveValues(move);
+                    strategy.getBoard().move(myMove.get("fromRow"),myMove.get("fromColumn"), myMove.get("toRow"), myMove.get("toColumn"), strategy.getBoard().playerType);
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
                 }

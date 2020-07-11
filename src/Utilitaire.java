@@ -5,23 +5,23 @@ public class Utilitaire {
     public static Map<String, Integer> converter = new HashMap<>();
 
     public Utilitaire(){
-        converter.put("A", 0);
-        converter.put("B", 1);
-        converter.put("C", 2);
-        converter.put("D", 3);
-        converter.put("E", 4);
-        converter.put("F", 5);
-        converter.put("G", 6);
-        converter.put("H", 7);
+        converter.put("A", 7);
+        converter.put("B", 6);
+        converter.put("C", 5);
+        converter.put("D", 4);
+        converter.put("E", 3);
+        converter.put("F", 2);
+        converter.put("G", 1);
+        converter.put("H", 0);
     }
 
     public Map<String, Integer> getConvertedMoveValues(String move){
         move = move.replace(" - ", "");
         move = move.replaceAll(" ", "");
         Map<String, Integer> convertedMoves = new HashMap<>();
-        convertedMoves.put("fromRow", Character.getNumericValue(move.charAt(1)));
+        convertedMoves.put("fromRow", Character.getNumericValue(move.charAt(1))-1);
         convertedMoves.put("fromColumn", converter.get(Character.toString(move.charAt(0))));
-        convertedMoves.put("toRow", Character.getNumericValue(move.charAt(3)));
+        convertedMoves.put("toRow", Character.getNumericValue(move.charAt(3))-1);
         convertedMoves.put("toColumn", converter.get(Character.toString(move.charAt(2))));
         return convertedMoves;
     }

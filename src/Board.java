@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Board {
     private int[][] board = new int[8][8];
-    private int playerType;
+    public int playerType;
     private final int BLACK = 2;
     private final int RED = 4;
     private final int EMPTY = 0;
@@ -45,23 +45,32 @@ public class Board {
     }
 
     public boolean isMoveValid(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
+
+        int playerAdjustment = 0;
         //Checking if locations from and to are valid in the first place
         if(!isValidLocation(fromRow, fromColumn) || !isValidLocation(toRow, toColumn)){
             return false;
         }
 
+        if (playerColor == BLACK){
+            playerAdjustment = -1;
+        } else {
+            playerAdjustment = 1;
+        }
+
         //checking if there is no horizontal movements
-        if (toColumn > fromColumn + 1 || toColumn < fromColumn - 1) {
+        if (fromRow == toRow) {
             return false;
         }
+
         int piece = getPieceAt(fromRow, fromColumn);
         //Checking if movement options are valid as black (2)
         if (piece == BLACK && playerColor == BLACK){
-            if (toRow != fromRow + 1){
+            if (toRow != fromRow + playerAdjustment){
                  return false;
             } else if (getPieceAt(toRow, toColumn) == 0){
                 return true;
-            } else if (getPieceAt(toRow, toColumn) == RED && toColumn != fromColumn) {
+            } else if (getPieceAt(toRow, toColumn) == RED) {
                 return true;
             }
         } else if (piece == RED && playerColor == RED){
@@ -69,7 +78,7 @@ public class Board {
                 return false;
             } else if (getPieceAt(toRow, toColumn) == 0){
                 return true;
-            } else if (getPieceAt(toRow, toColumn) == BLACK && toColumn != fromColumn){
+            } else if (getPieceAt(toRow, toColumn) == BLACK){
                 return true;
             }
         }
