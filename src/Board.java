@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Board {
     private int[][] board = new int[8][8];
     private int playerType;
@@ -44,7 +46,7 @@ public class Board {
 
     public boolean isMoveValid(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
         //Checking if locations from and to are valid in the first place
-        if(!isValidLocation(fromRow, fromColumn) || isValidLocation(toRow, toColumn)){
+        if(!isValidLocation(fromRow, fromColumn) || !isValidLocation(toRow, toColumn)){
             return false;
         }
 
@@ -86,5 +88,9 @@ public class Board {
 
     private int getPieceAt(int row, int column) {
         return this.board[row][column];
+    }
+
+    public void printBoard(){
+        System.out.println(Arrays.deepToString(this.board).replace("], ", "]\n"));
     }
 }

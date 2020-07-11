@@ -78,6 +78,7 @@ class ClientExemple {
                     System.out.println("Dernier coup :"+ s);
                     opponentMove = util.getConvertedMoveValues(s);
                     strategy.getBoard().move(opponentMove.get("fromRow"),opponentMove.get("fromColumn"), opponentMove.get("toRow"), opponentMove.get("toColumn"), opponentColor);
+                    strategy.getBoard().printBoard();
                     System.out.println("Entrez votre coup : ");
                     strategy.coupAdversaire(s);
                     String move = null;

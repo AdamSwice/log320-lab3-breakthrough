@@ -20,9 +20,9 @@ public class Utilitaire {
         move = move.replaceAll(" ", "");
         Map<String, Integer> convertedMoves = new HashMap<>();
         convertedMoves.put("fromRow", Character.getNumericValue(move.charAt(1)));
-        convertedMoves.put("fromColumn", converter.get(move.charAt(0)));
+        convertedMoves.put("fromColumn", converter.get(Character.toString(move.charAt(0))));
         convertedMoves.put("toRow", Character.getNumericValue(move.charAt(3)));
-        convertedMoves.put("toColumn", converter.get(move.charAt(2)));
+        convertedMoves.put("toColumn", converter.get(Character.toString(move.charAt(2))));
         return convertedMoves;
     }
 }
