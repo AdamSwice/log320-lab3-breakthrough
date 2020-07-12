@@ -13,13 +13,8 @@ public class Board {
     }
 
     private void createBoard(String board){
-        StringBuilder reversedBoard= new StringBuilder();
-        reversedBoard.append(board);
-        reversedBoard.reverse();
         String[] boardValues;
-        String reversedBoardString = ""+reversedBoard;
-        boardValues = reversedBoardString.split(" ");
-
+        boardValues = board.split(" ");
         int x=0,y=0;
         for(int i=0; i<boardValues.length;i++){
             this.board[x][y] = Integer.parseInt(boardValues[i]);
