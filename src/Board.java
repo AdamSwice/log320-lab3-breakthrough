@@ -53,9 +53,9 @@ public class Board {
         }
 
         if (playerColor == BLACK){
-            playerAdjustment = -1;
-        } else {
             playerAdjustment = 1;
+        } else {
+            playerAdjustment = -1;
         }
 
         //checking if there is no horizontal movements
