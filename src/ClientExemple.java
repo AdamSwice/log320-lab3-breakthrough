@@ -16,6 +16,7 @@ class ClientExemple {
         Strategy strategy = new Strategy(new Board("1", 0));
         Map<String, Integer> opponentMove = new HashMap<>();
         Map<String, Integer> myMove = new HashMap<>();
+        Minmax homeAI = null;
         int opponentColor = 0;
 
         Utilitaire util = new Utilitaire();
@@ -40,6 +41,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 4);
+                    homeAI = new Minmax(board, 3);
                     strategy = new Strategy(board);
                     opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
@@ -61,6 +63,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 2);
+                    homeAI = new Minmax(board, 3);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }

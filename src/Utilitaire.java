@@ -5,14 +5,14 @@ public class Utilitaire {
     public static Map<String, Integer> converter = new HashMap<>();
 
     public Utilitaire(){
-        converter.put("A", 7);
-        converter.put("B", 6);
-        converter.put("C", 5);
-        converter.put("D", 4);
-        converter.put("E", 3);
-        converter.put("F", 2);
-        converter.put("G", 1);
-        converter.put("H", 0);
+        converter.put("A", 0);
+        converter.put("B", 1);
+        converter.put("C", 2);
+        converter.put("D", 3);
+        converter.put("E", 4);
+        converter.put("F", 5);
+        converter.put("G", 6);
+        converter.put("H", 7);
         converter.put("1", 7);
         converter.put("2", 6);
         converter.put("3", 5);

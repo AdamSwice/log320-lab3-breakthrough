@@ -1,7 +1,10 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Board {
-    private int[][] board = new int[8][8];
+    private final int BOARDSIZE = 8;
+    private int[][] board = new int[BOARDSIZE][BOARDSIZE];
     public int playerType;
     private final int BLACK = 2;
     private final int RED = 4;
@@ -69,7 +72,7 @@ public class Board {
                 return true;
             }
         } else if (piece == RED && playerColor == RED){
-            if ( toRow != fromRow +1){
+            if ( toRow != fromRow + playerAdjustment){
                 return false;
             } else if (getPieceAt(toRow, toColumn) == 0){
                 return true;
@@ -89,6 +92,53 @@ public class Board {
         }
     }
 
+    public ArrayList<int[][]> getAllValidMoves(){
+        ArrayList<int[][]> possibleMoves = new ArrayList<>();
+
+        for (int row = 0; row < BOARDSIZE; row++){
+            for (int column = 0; column < BOARDSIZE; column++){
+                int piece = getPieceAt(row, column);
+                if (piece == playerType){
+                    possibleMoves.addAll(getValidMoves(row, column));
+                }
+            }
+        }
+
+        return possibleMoves;
+    }
+
+    public ArrayList<int[][]> getValidMoves(int row, int column){
+        int[][] tempBoard = board;
+        ArrayList<int[][]> possibleMoves = new ArrayList<>();
+
+        if (playerType == 4){
+            //Diagonal left
+            this.moveAndReturnBoard(row, column, row-1, column-1, playerType, tempBoard, possibleMoves);
+            //Forward
+            this.moveAndReturnBoard(row, column, row-1, column, playerType, tempBoard, possibleMoves);
+            //Diagonal right
+            this.moveAndReturnBoard(row, column, row-1, column+1, playerType, tempBoard, possibleMoves);
+        } else {
+            //Diagonal left
+            this.moveAndReturnBoard(row, column, row+1, column-1, playerType, tempBoard, possibleMoves);
+            //Forward
+            this.moveAndReturnBoard(row, column, row+1, column, playerType, tempBoard, possibleMoves);
+            //Diagonal right
+            this.moveAndReturnBoard(row, column, row+1, column+1, playerType, tempBoard, possibleMoves);
+        }
+        return possibleMoves;
+
+    }
+
+    private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, int[][] tempBoard, ArrayList<int[][]> possibleMoves){
+        if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
+            tempBoard[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
+            tempBoard[fromRow][fromColumn] = EMPTY;
+            possibleMoves.add(tempBoard);
+        }
+    }
+
+
 
     private int getPieceAt(int row, int column) {
         return this.board[row][column];
@@ -96,5 +146,9 @@ public class Board {
 
     public void printBoard(){
         System.out.println(Arrays.deepToString(this.board).replace("], ", "]\n"));
+    }
+
+    public void setBoard(int[][] board) {
+        this.board = board;
     }
 }
