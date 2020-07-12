@@ -81,4 +81,7 @@ public class Minmax {
         return rand.nextInt((100) + 1);
     }
 
+    public void updateBoard(Board boardObject) {
+        this.boardObject = boardObject;
+    }
 }
