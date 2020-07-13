@@ -61,7 +61,8 @@ public class Board {
         if(!isValidLocation(fromRow, fromColumn) || !isValidLocation(toRow, toColumn)){
             return false;
         }
-
+        int piece = getPieceAt(fromRow, fromColumn);
+        int pieceDestination = getPieceAt(toRow, toColumn);
         if (playerColor == BLACK){
             playerAdjustment = 1;
         } else {
@@ -72,8 +73,11 @@ public class Board {
         if (fromRow == toRow) {
             return false;
         }
+        if(fromColumn == toColumn && pieceDestination!=0){
+            return false;
+        }
 
-        int piece = getPieceAt(fromRow, fromColumn);
+
         //Checking if movement options are valid as black (2)
         if (piece == BLACK && playerColor == BLACK){
             if (toRow != fromRow + playerAdjustment){

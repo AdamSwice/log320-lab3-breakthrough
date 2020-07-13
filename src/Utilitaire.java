@@ -60,7 +60,7 @@ public class Utilitaire {
         column+=8;
         postion=OutputConverter.get(""+column);
 
-        postion +=OutputConverter.get(move.charAt(0));
+        postion +=OutputConverter.get(Character.toString(move.charAt(0)));
 
 
     return postion;

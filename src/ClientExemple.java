@@ -41,14 +41,16 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 4);
-                    homeAI = new Minmax(board, 3);
+                    homeAI = new Minmax(board, 4);
                     strategy = new Strategy(board);
                     opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                     String move = null;
                     //move = console.readLine();
                     move=homeAI.makeMove();
-
+                    myMove = util.getConvertedMoveValues(move);
+                    strategy.getBoard().move(myMove.get("fromRow"),myMove.get("fromColumn"), myMove.get("toRow"), myMove.get("toColumn"), strategy.getBoard().playerType);
+                    System.out.println(move);
 
                     output.write(move.getBytes(),0,move.length());
                     output.flush();
@@ -64,7 +66,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 2);
-                    homeAI = new Minmax(board, 3);
+                    homeAI = new Minmax(board, 4);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }
@@ -88,6 +90,7 @@ class ClientExemple {
                     strategy.coupAdversaire(s);
                     String move = null;
                     move=homeAI.makeMove();
+                    System.out.println(move);
                     //move = console.readLine();
                     myMove = util.getConvertedMoveValues(move);
                     strategy.getBoard().move(myMove.get("fromRow"),myMove.get("fromColumn"), myMove.get("toRow"), myMove.get("toColumn"), strategy.getBoard().playerType);
