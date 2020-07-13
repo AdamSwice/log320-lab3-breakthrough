@@ -11,8 +11,20 @@ public class Board {
     private final int EMPTY = 0;
 
     public Board(String Board, int playerType){
+
         createBoard(Board);
         this.playerType = playerType;
+    }
+    public Board(int [][] board, int playerType){
+        this.board=board;
+        this.playerType = playerType;
+    }
+    public Board clone()
+    {
+
+        int[][] newBoard =CopyArray(board);
+        Board b = new Board(newBoard,this.playerType);
+        return b;
     }
 
     private void createBoard(String board){
@@ -108,23 +120,23 @@ public class Board {
     }
 
     public ArrayList<int[][]> getValidMoves(int row, int column){
-        int[][] tempBoard = board;
+
         ArrayList<int[][]> possibleMoves = new ArrayList<>();
 
         if (playerType == 4){
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row-1, column-1, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column-1, playerType, CopyArray(board), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row-1, column, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column, playerType, CopyArray(board), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row-1, column+1, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column+1, playerType, CopyArray(board), possibleMoves);
         } else {
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row+1, column-1, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column-1, playerType, CopyArray(board), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row+1, column, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column, playerType, CopyArray(board), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row+1, column+1, playerType, tempBoard, possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column+1, playerType, CopyArray(board), possibleMoves);
         }
         return possibleMoves;
 
@@ -137,8 +149,20 @@ public class Board {
             possibleMoves.add(tempBoard);
         }
     }
+    public int[][] CopyArray(int[][] original){
+        int[][] newBoard = new int[BOARDSIZE][BOARDSIZE];
+        for(int i = 0; i < BOARDSIZE; i++) {
+            for(int j = 0; j< BOARDSIZE; j++) {
+                newBoard[i][j] = original[i][j];
+            }
+        }
+        return newBoard;
+    }
 
 
+    public int getPlayerType() {
+        return playerType;
+    }
 
     private int getPieceAt(int row, int column) {
         return this.board[row][column];
@@ -151,4 +175,7 @@ public class Board {
     public void setBoard(int[][] board) {
         this.board = board;
     }
+
+
+
 }

@@ -7,6 +7,7 @@ public class Minmax {
     private double amountOfMovesCalled;
     private int pruned = 0;
     private Board boardObject;
+    private final int BOARDSIZE = 8;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -16,19 +17,42 @@ public class Minmax {
     //TODO: fct qui kickstart l'algo de minmaxstart et qui dois retourner un string qui indique le move a faire une fois qu'on recoit
     // l'état de board que l'algo a choisit.
     public String makeMove(){
-        return "yo";
+        Utilitaire util= new Utilitaire("Output");
+        int [][] newBoardState;
+        int [][] oldBoard = boardObject.getBoard();
+        String positionInitial="";
+        String positionFinale="";
+        String move;
+        newBoardState=minimaxStart(depth);
+
+        for(int i = 0;i<BOARDSIZE;i++) {
+            for (int j = 0; j < BOARDSIZE; j++) {
+                if(oldBoard[i][j] != newBoardState[i][j]){
+                    if(newBoardState[i][j]==0){
+                        positionInitial = ""+ i + j;
+
+                    }
+                    else{
+                        positionFinale=""+ i + j;
+                    }
+                }
+            }
+        }
+        move=util.getConvertedOutputMoveValues(positionInitial);
+        move+=util.getConvertedOutputMoveValues(positionFinale);
+       return move;
     }
 
     private int[][] minimaxStart(int depth){
         double alpha = Double.NEGATIVE_INFINITY;
         double beta = Double.POSITIVE_INFINITY;
-
+        Board clonedBoard = boardObject.clone();
         ArrayList<int[][]> possibleMoves;
-        possibleMoves = this.boardObject.getAllValidMoves();
+        possibleMoves = clonedBoard.getAllValidMoves();
         ArrayList<Double> heuristic = new ArrayList<>();
 
         for (int i = 0; i < possibleMoves.size(); i++){
-            Board tempBoard = boardObject;
+            Board tempBoard = boardObject.clone();
             tempBoard.setBoard(possibleMoves.get(i));
             //TODO:
             heuristic.add(minimax(tempBoard, depth - 1, alpha, beta));
@@ -71,7 +95,8 @@ public class Minmax {
 
             init = Math.max(result, init);
             alpha = Math.max(alpha, init);
-
+            if(alpha >= beta)
+                break;
         }
         return init;
     }

@@ -19,7 +19,7 @@ class ClientExemple {
         Minmax homeAI = null;
         int opponentColor = 0;
 
-        Utilitaire util = new Utilitaire();
+        Utilitaire util = new Utilitaire("input");
         try {
             MyClient = new Socket("localhost", 8888);
 
@@ -46,7 +46,8 @@ class ClientExemple {
                     opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
                     String move = null;
-                    move = console.readLine();
+                    //move = console.readLine();
+                    move=homeAI.makeMove();
 
 
                     output.write(move.getBytes(),0,move.length());
@@ -86,7 +87,8 @@ class ClientExemple {
                     System.out.println("Entrez votre coup : ");
                     strategy.coupAdversaire(s);
                     String move = null;
-                    move = console.readLine();
+                    move=homeAI.makeMove();
+                    //move = console.readLine();
                     myMove = util.getConvertedMoveValues(move);
                     strategy.getBoard().move(myMove.get("fromRow"),myMove.get("fromColumn"), myMove.get("toRow"), myMove.get("toColumn"), strategy.getBoard().playerType);
                     output.write(move.getBytes(),0,move.length());
