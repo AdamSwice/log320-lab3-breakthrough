@@ -6,6 +6,7 @@ public class Board {
     private final int BOARDSIZE = 8;
     private int[][] board = new int[BOARDSIZE][BOARDSIZE];
     public int playerType;
+    public int AIColor;
     private final int BLACK = 2;
     private final int RED = 4;
     private final int EMPTY = 0;
@@ -14,16 +15,23 @@ public class Board {
 
         createBoard(Board);
         this.playerType = playerType;
+
+        if(playerType == RED)
+            AIColor=BLACK;
+        else
+            AIColor = RED;
+
     }
-    public Board(int [][] board, int playerType){
+    public Board(int [][] board, int playerType,int AIColor){
         this.board=board;
         this.playerType = playerType;
+        this.AIColor= AIColor;
     }
     public Board clone()
     {
 
         int[][] newBoard =CopyArray(board);
-        Board b = new Board(newBoard,this.playerType);
+        Board b = new Board(newBoard,this.playerType,this.AIColor);
         return b;
     }
 
@@ -108,14 +116,14 @@ public class Board {
         }
     }
 
-    public ArrayList<int[][]> getAllValidMoves(){
+    public ArrayList<int[][]> getAllValidMoves(int color){
         ArrayList<int[][]> possibleMoves = new ArrayList<>();
 
         for (int row = 0; row < BOARDSIZE; row++){
             for (int column = 0; column < BOARDSIZE; column++){
                 int piece = getPieceAt(row, column);
-                if (piece == playerType){
-                    possibleMoves.addAll(getValidMoves(row, column));
+                if (piece == color){
+                    possibleMoves.addAll(getValidMoves(row, column, color));
                 }
             }
         }
@@ -123,24 +131,24 @@ public class Board {
         return possibleMoves;
     }
 
-    public ArrayList<int[][]> getValidMoves(int row, int column){
+    public ArrayList<int[][]> getValidMoves(int row, int column, int color){
 
         ArrayList<int[][]> possibleMoves = new ArrayList<>();
 
-        if (playerType == 4){
+        if (color == 4){
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row-1, column-1, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column-1, color, CopyArray(board), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row-1, column, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column, color, CopyArray(board), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row-1, column+1, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column+1, color, CopyArray(board), possibleMoves);
         } else {
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row+1, column-1, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column-1, color, CopyArray(board), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row+1, column, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column, color, CopyArray(board), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row+1, column+1, playerType, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column+1, color, CopyArray(board), possibleMoves);
         }
         return possibleMoves;
 
