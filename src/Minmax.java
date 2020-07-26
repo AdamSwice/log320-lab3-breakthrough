@@ -145,7 +145,7 @@ public class Minmax {
                         points += Math.pow(i,2);
                         //Lose points for every piece that is in danger
                         if (board.getPieceAt(i+1 < 8 ? i + 1 : 7, j-1 > 0 ? j - 1 : 0) == board.RED || board.getPieceAt(i+1 < 8 ? i + 1 : 7, j+1 < 8 ? j + 1 : 7 ) == board.RED) {
-                            points-=10;
+                            points-=Math.pow(i,10);
                         } else {
                             points+=10;
                         }
