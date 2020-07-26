@@ -91,9 +91,9 @@ public class Minmax {
             //Home player is always MAX
             for (int i = 0; i < possibleMoves.size(); i++) {
                 tempBoard = possibleMoves.get(i);
-                System.out.println("This is a playerBoard "+depth);
-                tempBoard.printBoard();
-                System.out.println("-----------------------------------------------------------------");
+//                System.out.println("This is a playerBoard "+depth);
+//                tempBoard.printBoard();
+//                System.out.println("-----------------------------------------------------------------");
 
                 double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
 
@@ -112,9 +112,9 @@ public class Minmax {
             //Home player is always MAX
             for (int i = 0; i < possibleMoves.size(); i++) {
                 tempBoard =possibleMoves.get(i);
-                System.out.println("Enemy Board "+depth);
-                tempBoard.printBoard();
-                System.out.println("-----------------------------------------------------------------");
+//                System.out.println("Enemy Board "+depth);
+//                tempBoard.printBoard();
+//                System.out.println("-----------------------------------------------------------------");
                 double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
 
                 bestValue = Math.min(value, bestValue);
@@ -128,8 +128,41 @@ public class Minmax {
     }
 
     private double getHeuristic(Board board){
-
-        return board.numberOfRedPiece-board.numberOfBlackPiece;
+        //TODO: doesnt make bad moves necessarily, but doesnt defend itself... WIP.
+        double points = 0;
+        if (board.getPlayerType() == board.BLACK) {
+            //If board state has more of our pieces then opponent, get points
+            if (board.numberOfBlackPiece > board.numberOfRedPiece){
+                points+=board.numberOfBlackPiece*10;
+            }
+            //If we win, give a lot of points
+            if (board.didIWin){
+                points+= 1000;
+            }
+            for (int i = 0; i<BOARDSIZE; i++){
+                for (int j = 0; j<BOARDSIZE; j++){
+                    if (board.getPieceAt(i,j) == board.BLACK){
+                        points += Math.pow(i,2);
+                        //Lose points for every piece that is in danger
+                        if (board.getPieceAt(i+1 < 8 ? i + 1 : 7, j-1 > 0 ? j - 1 : 0) == board.RED || board.getPieceAt(i+1 < 8 ? i + 1 : 7, j+1 < 8 ? j + 1 : 7 ) == board.RED) {
+                            points-=10;
+                        } else {
+                            points+=10;
+                        }
+                    } else if (board.getPieceAt(i,j) == board.RED){
+                        //if enemy piece is in row 0,1,2,3 (black territory), lose points.
+                        if (i != 0 || i != 1 || i != 2  || i != 3){
+                            points+= 30;
+                        }
+                    }
+                }
+            }
+        } else if (board.getPlayerType() == board.RED){
+            if (board.didIWin){
+                points+= 1000;
+            }
+        }
+        return points;
     }
 
 

@@ -9,9 +9,11 @@ public class Board {
     public int AIColor;
     public int numberOfRedPiece=16;
     public int numberOfBlackPiece=16;
-    private final int BLACK = 2;
-    private final int RED = 4;
-    private final int EMPTY = 0;
+    public final int BLACK = 2;
+    public final int RED = 4;
+    public final int EMPTY = 0;
+    public boolean didIWin = false;
+    public int heuristicPoints;
 
     public Board(String Board, int playerType){
 
@@ -162,13 +164,16 @@ public class Board {
 
     private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, Board tempBoard, ArrayList<Board> possibleMoves){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
-            if(tempBoard.getBoard()[toRow][toColumn]==BLACK)
+            if(tempBoard.getBoard()[toRow][toColumn]==BLACK && playerColor == RED)
                 tempBoard.numberOfBlackPiece--;
-            else if(tempBoard.getBoard()[toRow][toColumn]==RED)
+            else if(tempBoard.getBoard()[toRow][toColumn]==RED && playerColor == BLACK)
                 tempBoard.numberOfRedPiece--;
             tempBoard.modifyBoard(toRow,toColumn,getPieceAt(fromRow, fromColumn));
             tempBoard.modifyBoard(fromRow, fromColumn, EMPTY);
             possibleMoves.add(tempBoard);
+            if (toRow == 7 || toRow == 0){
+                didIWin = true;
+            }
         }
     }
     public int[][] CopyArray(int[][] original){
@@ -186,7 +191,7 @@ public class Board {
         return playerType;
     }
 
-    private int getPieceAt(int row, int column) {
+    public int getPieceAt(int row, int column) {
         return this.board[row][column];
     }
 
