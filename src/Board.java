@@ -7,6 +7,8 @@ public class Board {
     private int[][] board = new int[BOARDSIZE][BOARDSIZE];
     public int playerType;
     public int AIColor;
+    public int numberOfRedPiece=16;
+    public int numberOfBlackPiece=16;
     private final int BLACK = 2;
     private final int RED = 4;
     private final int EMPTY = 0;
@@ -109,6 +111,10 @@ public class Board {
 
     public void move(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
+            if(board[toRow][toColumn]==BLACK)
+                numberOfBlackPiece--;
+            else if(board[toRow][toColumn]==RED)
+                numberOfRedPiece--;
             board[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
             board[fromRow][fromColumn] = EMPTY;
             //didIwin();
@@ -116,8 +122,8 @@ public class Board {
         }
     }
 
-    public ArrayList<int[][]> getAllValidMoves(int color){
-        ArrayList<int[][]> possibleMoves = new ArrayList<>();
+    public ArrayList<Board> getAllValidMoves(int color){
+        ArrayList<Board> possibleMoves = new ArrayList<>();
 
         for (int row = 0; row < BOARDSIZE; row++){
             for (int column = 0; column < BOARDSIZE; column++){
@@ -131,33 +137,37 @@ public class Board {
         return possibleMoves;
     }
 
-    public ArrayList<int[][]> getValidMoves(int row, int column, int color){
+    public ArrayList<Board> getValidMoves(int row, int column, int color){
 
-        ArrayList<int[][]> possibleMoves = new ArrayList<>();
+        ArrayList<Board> possibleMoves = new ArrayList<>();
 
         if (color == 4){
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row-1, column-1, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column-1, color, this.clone(), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row-1, column, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column, color, this.clone(), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row-1, column+1, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row-1, column+1, color, this.clone(), possibleMoves);
         } else {
             //Diagonal left
-            this.moveAndReturnBoard(row, column, row+1, column-1, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column-1, color, this.clone(), possibleMoves);
             //Forward
-            this.moveAndReturnBoard(row, column, row+1, column, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column, color, this.clone(), possibleMoves);
             //Diagonal right
-            this.moveAndReturnBoard(row, column, row+1, column+1, color, CopyArray(board), possibleMoves);
+            this.moveAndReturnBoard(row, column, row+1, column+1, color, this.clone(), possibleMoves);
         }
         return possibleMoves;
 
     }
 
-    private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, int[][] tempBoard, ArrayList<int[][]> possibleMoves){
+    private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, Board tempBoard, ArrayList<Board> possibleMoves){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
-            tempBoard[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
-            tempBoard[fromRow][fromColumn] = EMPTY;
+            if(tempBoard.getBoard()[toRow][toColumn]==BLACK)
+                tempBoard.numberOfBlackPiece--;
+            else if(tempBoard.getBoard()[toRow][toColumn]==RED)
+                tempBoard.numberOfRedPiece--;
+            tempBoard.modifyBoard(toRow,toColumn,getPieceAt(fromRow, fromColumn));
+            tempBoard.modifyBoard(fromRow, fromColumn, EMPTY);
             possibleMoves.add(tempBoard);
         }
     }
@@ -186,6 +196,9 @@ public class Board {
 
     public void setBoard(int[][] board) {
         this.board = board;
+    }
+    public void modifyBoard(int i,int j,int value){
+        board[i][j]=value;
     }
 
 

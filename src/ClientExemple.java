@@ -41,10 +41,10 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 4);
-                    homeAI = new Minmax(board, 9);
+                    homeAI = new Minmax(board, 4);
                     strategy = new Strategy(board);
                     opponentColor = 2;
-                    System.out.println("Nouvelle partie! Vous jouer blanc, entrez votre premier coup : ");
+                    System.out.println("Nouvelle partie! Vous jouer rouge, entrez votre premier coup : ");
                     String move = null;
                     //move = console.readLine();
                     move=homeAI.makeMove();
@@ -66,7 +66,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 2);
-                    homeAI = new Minmax(board, 10);
+                    homeAI = new Minmax(board, 4);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }

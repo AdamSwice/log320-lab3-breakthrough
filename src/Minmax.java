@@ -47,14 +47,14 @@ public class Minmax {
         double alpha = Double.NEGATIVE_INFINITY;
         double beta = Double.POSITIVE_INFINITY;
         Board clonedBoard = boardObject.clone();
-        ArrayList<int[][]> possibleMoves;
+        ArrayList<Board> possibleMoves;
         possibleMoves = clonedBoard.getAllValidMoves(boardObject.playerType);
         ArrayList<Double> heuristic = new ArrayList<>();
 
         for (int i = 0; i < possibleMoves.size(); i++){
-            Board tempBoard = boardObject.clone();
-            tempBoard.setBoard(possibleMoves.get(i));
+            Board tempBoard =possibleMoves.get(i);
             //TODO:
+
             heuristic.add(minimax(tempBoard, depth - 1,humanPlayer, alpha, beta));
         }
 
@@ -75,58 +75,64 @@ public class Minmax {
             }
         }
         //TODO : renvoyer l'indexe de qui sera retourner dans l'heuristique
-        return possibleMoves.get(random.nextInt(possibleMoves.size()));
+        return possibleMoves.get(random.nextInt(possibleMoves.size())).getBoard();
     }
 
     private double minimax(Board board, int depth, boolean currentPlayer, double alpha, double beta){
-        double init=0;
         Board tempBoard = null;
         if (depth == 0) {
-            return getHeuristic();
+            return getHeuristic(board);
         }
 
         if(currentPlayer) {
-            ArrayList<int[][]> possibleMoves = board.getAllValidMoves(board.playerType);
-            init = Double.NEGATIVE_INFINITY;
+            ArrayList<Board> possibleMoves = board.getAllValidMoves(board.playerType);
+            double bestValue = Double.NEGATIVE_INFINITY;
 
             //Home player is always MAX
             for (int i = 0; i < possibleMoves.size(); i++) {
-                tempBoard = board;
-                tempBoard.setBoard(possibleMoves.get(i));
+                tempBoard = possibleMoves.get(i);
+                System.out.println("This is a playerBoard "+depth);
+                tempBoard.printBoard();
+                System.out.println("-----------------------------------------------------------------");
 
-                double result = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
+                double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
 
-                init = Math.max(result, init);
-                alpha = Math.max(alpha, init);
+                bestValue = Math.max(value, bestValue);
+                alpha = Math.max(alpha, bestValue);
                 if (alpha >= beta)
                     break;
             }
+            return bestValue;
 
         }
         else{
-            ArrayList<int[][]> possibleMoves = board.getAllValidMoves(board.AIColor);
-            init = Double.POSITIVE_INFINITY;
+            ArrayList<Board> possibleMoves = board.getAllValidMoves(board.AIColor);
+            double bestValue = Double.POSITIVE_INFINITY;
 
             //Home player is always MAX
             for (int i = 0; i < possibleMoves.size(); i++) {
-                tempBoard = board;
-                tempBoard.setBoard(possibleMoves.get(i));
+                tempBoard =possibleMoves.get(i);
+                System.out.println("Enemy Board "+depth);
+                tempBoard.printBoard();
+                System.out.println("-----------------------------------------------------------------");
+                double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
 
-                double result = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
-
-                init = Math.max(result, init);
-                alpha = Math.max(alpha, init);
+                bestValue = Math.min(value, bestValue);
+                beta = Math.min(alpha, bestValue);
                 if (alpha >= beta)
                     break;
             }
+            return bestValue;
         }
-        return init;
+
     }
 
-    private double getHeuristic(){
-        Random rand = new Random();
-        return rand.nextInt((100) + 1);
+    private double getHeuristic(Board board){
+
+        return board.numberOfRedPiece-board.numberOfBlackPiece;
     }
+
+
 
     public void updateBoard(Board boardObject) {
         this.boardObject = boardObject;
