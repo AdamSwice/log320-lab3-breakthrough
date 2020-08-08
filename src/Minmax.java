@@ -12,16 +12,16 @@ public class Minmax {
     public final int RED = 4;
     public final int EMPTY = 0;
     public final int WinValue = 500000;
-    public final short PieceAlmostWinValue = 10;
+    public final short PieceAlmostWinValue = 100;
     public final short PieceValue = 1300;
     public final short PieceDangerValue = 10;
-    public final short PieceHighDangerValue = 100;
-    public final short PieceAttackValue = 50;
-    public final short PieceProtectionValue = 65;
+    public final short PieceHighDangerValue = 50;
+    public final short PieceAttackValue = 35;
+    public final short PieceProtectionValue = 100;
     public final short PieceConnectionHValue = 35;
     public final short PieceConnectionVValue = 15;
     public final short PieceColumnHoleValue = 20;
-    public final short PieceHomeGroundValue = 10;
+    public final short PieceHomeGroundValue = 150;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -126,9 +126,7 @@ public class Minmax {
             //Home player is always MAX
             for (int i = 0; i < possibleMoves.size(); i++) {
                 tempBoard =possibleMoves.get(i);
-//                System.out.println("Enemy Board "+depth);
-//                tempBoard.printBoard();
-//                System.out.println("-----------------------------------------------------------------");
+
                 double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
 
                 bestValue = Math.min(value, bestValue);
@@ -173,9 +171,9 @@ public class Minmax {
                         boolean threatA = false;
                         boolean threatB = false;
                         if (j > 0)
-                            threatA = (gameBoard[i - 1][0] == EMPTY);
+                            threatA = (gameBoard[0][j-1] == EMPTY);
                         if (j > 7)
-                            threatB = (gameBoard[i + 1][0] == EMPTY);
+                            threatB = (gameBoard[0][j+1] == EMPTY);
                         if ((threatA && threatB))
                             //ici truc wierd
                             Points += PieceAlmostWinValue;
@@ -191,9 +189,9 @@ public class Minmax {
                         boolean threatA = false;
                         boolean threatB = false;
                         if (j > 0)
-                            threatA = (gameBoard[i - 1][7] == EMPTY);
+                            threatA = (gameBoard[7][j-1] == EMPTY);
                         if (j > 7)
-                            threatB = (gameBoard[i + 1][7] == EMPTY);
+                            threatB = (gameBoard[7][j+1] == EMPTY);
                         if ((threatA && threatB))
                             //ici truc wierd
                             Points-= PieceAlmostWinValue;
