@@ -41,7 +41,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 4);
-                    homeAI = new Minmax(board, 5);
+                    homeAI = new Minmax(board, 6);
                     strategy = new Strategy(board);
                     opponentColor = 2;
                     System.out.println("Nouvelle partie! Vous jouer rouge, entrez votre premier coup : ");
@@ -66,7 +66,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 2);
-                    homeAI = new Minmax(board, 5);
+                    homeAI = new Minmax(board, 6);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }

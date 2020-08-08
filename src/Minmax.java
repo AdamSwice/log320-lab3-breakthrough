@@ -143,18 +143,15 @@ public class Minmax {
 
     private double getHeuristic(Board board,int depth){
         //TODO: doesnt make bad moves necessarily, but doesnt defend itself... WIP.
-        int colorMoving=board.playerType;
-        if(depth%2!=0){
-            colorMoving=board.AIColor;
-        }
 
-        return stategieDeff(board,colorMoving);
+
+        return stategieDeff(board,depth);
     }
 
 
 
 
-    public double stategieDeff(Board board,int colorMoving){
+    public double stategieDeff(Board board,int depth){
         double Points=0;
         int RemainingRedPieces = 0;
         int RemainingBlackPieces = 0;
@@ -216,9 +213,9 @@ public class Minmax {
             board.blackWin=true;
 
         if(board.redWin)
-            Points+=WinValue;
+            Points+=depth*WinValue;
         if(board.blackWin)
-            Points-=WinValue;
+            Points-=depth*WinValue;
 //        if(colorMoving==BLACK){
 //            board.value=-board.value;
 //        }
