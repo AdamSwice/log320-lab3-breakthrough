@@ -8,21 +8,20 @@ public class Minmax {
     private int pruned = 0;
     private Board boardObject;
     private final int BOARDSIZE = 8;
-    private final int PIECESVALUE=1000;
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
     public final int WinValue = 500000;
     public final short PieceAlmostWinValue = 10000;
     public final short PieceValue = 1300;
-    public final short PieceDangerValue = 30;
-    public final short PieceHighDangerValue = 100;
-    public final short PieceAttackValue = 50;
-    public final short PieceProtectionValue = 65;
-    public final short PieceConnectionHValue = 500;
-    public final short PieceConnectionVValue = 15;
+    public final short PieceDangerValue = 5000;
+    public final short PieceHighDangerValue = 10000;
+    public final short PieceAttackValue = 250;
+    public final short PieceProtectionValue = 700;
+    public final short PieceConnectionHValue = 100;
+    public final short PieceConnectionVValue = 100;
     public final short PieceColumnHoleValue = 20;
-    public final short PieceHomeGroundValue = 100;
+    public final short PieceHomeGroundValue = 500;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -95,7 +94,7 @@ public class Minmax {
 
     private double minimax(Board board, int depth, boolean currentPlayer, double alpha, double beta){
         Board tempBoard = null;
-        if (depth == 0 || board.playerWin) {
+        if (depth == 0 || board.playerWin || board.AIWin) {
             return getHeuristic(board,depth);
         }
 
@@ -220,9 +219,9 @@ public class Minmax {
             board.value+=WinValue;
         if(board.blackWin)
             board.value-=WinValue;
-        if(colorMoving==BLACK){
-            board.value=-board.value;
-        }
+//        if(colorMoving==BLACK){
+//            board.value=-board.value;
+//        }
            return board.value;
     }
 
@@ -274,7 +273,7 @@ public class Minmax {
         if (j > 0)
         {
 
-            if (board[i][j-1] ==boardObject.playerType)
+            if (board[i][j-1] ==board[i][j])
             {
                 return true;
             }
@@ -282,7 +281,7 @@ public class Minmax {
         if (j < 7)
         {
 
-            if (board[i][j+1] ==boardObject.playerType)
+            if (board[i][j+1] ==board[i][j])
             {
                 return true;
             }
@@ -295,7 +294,7 @@ public class Minmax {
         if (i > 0)
         {
 
-            if (board[i-1][j] ==boardObject.playerType)
+            if (board[i-1][j] ==board[i][j])
             {
                 return true;
             }
@@ -303,7 +302,7 @@ public class Minmax {
         if (i < 7)
         {
 
-            if (board[i+1][j] ==boardObject.playerType)
+            if (board[i+1][j] ==board[i][j])
             {
                 return true;
             }
@@ -315,21 +314,21 @@ public class Minmax {
         int protectionValue=0;
         if (j > 0)
         {
-            if(boardObject.playerType==RED) {
-                if (board[i + 1][j - 1] == boardObject.playerType)
+            if(board[i][j]==RED) {
+                if (board[i + 1][j - 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
-            }else if(boardObject.playerType==BLACK){
-                if (board[i - 1][j - 1] == boardObject.playerType)
+            }else if(board[i][j]==BLACK){
+                if (board[i - 1][j - 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }
         }
         if (j < 7)
         {
-            if(boardObject.playerType==RED) {
-                if (board[i + 1][j + 1] == boardObject.playerType)
+            if(board[i][j]==RED) {
+                if (board[i + 1][j + 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
-            }else if(boardObject.playerType==BLACK){
-                if (board[i - 1][j + 1] == boardObject.playerType)
+            }else if(board[i][j]==BLACK){
+                if (board[i - 1][j + 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }
         }
@@ -341,28 +340,28 @@ public class Minmax {
         if (j > 0)
         {
 
-            if(boardObject.playerType==RED) {
+            if(board[i][j]==RED) {
                 if(i>0) {
-                    if (board[i - 1][j - 1] == boardObject.AIColor)
+                    if (board[i - 1][j - 1] == BLACK)
                         attackedValue += PieceAttackValue;
                 }
-            }else if(boardObject.playerType==BLACK){
+            }else if(board[i][j]==BLACK){
                 if(i<7) {
-                    if (board[i + 1][j - 1] == boardObject.AIColor)
+                    if (board[i + 1][j - 1] == RED)
                         attackedValue += PieceAttackValue;
                 }
             }
         }
         if (j < 7)
         {
-            if(boardObject.playerType==RED) {
+            if(board[i][j]==RED) {
                 if(i>0) {
-                    if (board[i - 1][j + 1] == boardObject.AIColor)
+                    if (board[i - 1][j + 1] == BLACK)
                         attackedValue += PieceAttackValue;
                 }
-            }else if(boardObject.playerType==BLACK){
+            }else if(board[i][j]==BLACK){
                 if(i<7) {
-                    if (board[i + 1][j + 1] == boardObject.AIColor)
+                    if (board[i + 1][j + 1] == RED)
                         attackedValue += PieceAttackValue;
                 }
             }

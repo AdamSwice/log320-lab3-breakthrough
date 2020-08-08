@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96be029f-06aa-4d92-b912-9f9ee07d1528" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GamePiece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/ClientExemple.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/ClientExemple.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Minmax.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Minmax.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientExemple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientExemple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Minmax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Minmax.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595538682211</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="min max peut etre mal implementer">
+      <created>1596908539677</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596908539677</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -99,7 +103,8 @@
     <MESSAGE value="output conversion non fonctionnal" />
     <MESSAGE value="functionnal but its loosing each times" />
     <MESSAGE value="Ai added to min-max" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ai added to min-max" />
+    <MESSAGE value="min max peut etre mal implementer" />
+    <option name="LAST_COMMIT_MESSAGE" value="min max peut etre mal implementer" />
   </component>
   <component name="WindowStateProjectService">
     <state x="815" y="303" key="#com.intellij.ide.util.MemberChooser" timestamp="1594672786101">
@@ -112,68 +117,70 @@
     </state>
     <state x="673" y="257" key="#xdebugger.evaluate/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1594675878726" />
     <state x="-532" y="323" width="490" height="594" key="#xdebugger.evaluate/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1595793716003" />
-    <state x="614" y="119" key="CommitChangelistDialog2" timestamp="1595538680947">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="819" y="160" key="CommitChangelistDialog2" timestamp="1596908538193">
+      <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state x="614" y="119" key="CommitChangelistDialog2/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595538680947" />
+    <state x="819" y="160" key="CommitChangelistDialog2/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908538193" />
     <state width="451" height="466" key="DebuggerActiveHint" timestamp="1595537764578">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="451" height="466" key="DebuggerActiveHint/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595537764578" />
-    <state width="2517" height="304" key="GridCell.Tab.0.bottom" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.0.bottom" timestamp="1596912626496">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1877" height="74" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
-    <state width="2517" height="304" key="GridCell.Tab.0.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.0.center" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.0.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626496" />
+    <state width="1279" height="1352" key="GridCell.Tab.0.center" timestamp="1596912626496">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1877" height="74" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
-    <state width="2517" height="304" key="GridCell.Tab.0.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.0.left" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.0.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626496" />
+    <state width="1279" height="1352" key="GridCell.Tab.0.left" timestamp="1596912626496">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1877" height="74" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
-    <state width="2517" height="304" key="GridCell.Tab.0.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.0.right" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.0.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626496" />
+    <state width="1279" height="1352" key="GridCell.Tab.0.right" timestamp="1596912626496">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1877" height="74" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
-    <state width="2517" height="304" key="GridCell.Tab.0.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.1.bottom" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.0.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626496" />
+    <state width="1279" height="1352" key="GridCell.Tab.1.bottom" timestamp="1596912626667">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1123" height="351" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
-    <state width="2517" height="304" key="GridCell.Tab.1.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.1.center" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.1.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626667" />
+    <state width="1279" height="1352" key="GridCell.Tab.1.center" timestamp="1596912626667">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1123" height="351" key="GridCell.Tab.1.center/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
-    <state width="2517" height="304" key="GridCell.Tab.1.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.1.left" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.1.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626667" />
+    <state width="1279" height="1352" key="GridCell.Tab.1.left" timestamp="1596912626666">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1123" height="351" key="GridCell.Tab.1.left/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
-    <state width="2517" height="304" key="GridCell.Tab.1.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state width="2517" height="304" key="GridCell.Tab.1.right" timestamp="1596908219783">
+    <state width="1279" height="1352" key="GridCell.Tab.1.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626666" />
+    <state width="1279" height="1352" key="GridCell.Tab.1.right" timestamp="1596912626667">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state width="1123" height="351" key="GridCell.Tab.1.right/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
-    <state width="2517" height="304" key="GridCell.Tab.1.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908219783" />
-    <state x="552" y="257" key="Vcs.Push.Dialog.v2" timestamp="1595539405190">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1279" height="1352" key="GridCell.Tab.1.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912626667" />
+    <state x="736" y="345" key="Vcs.Push.Dialog.v2" timestamp="1596908544980">
+      <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539405190" />
+    <state x="736" y="345" key="Vcs.Push.Dialog.v2/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596908544980" />
     <state x="977" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1596892807120">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
     <state x="733" y="394" key="com.intellij.ide.util.TipDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648677610" />
     <state x="977" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596892807120" />
     <state x="977" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1410/-1920.0.1920.1050@0.0.2560.1410" timestamp="1596648384981" />
-    <state x="858" y="441" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595792027710">
+    <state x="858" y="441" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596912681007">
       <screen x="0" y="0" width="2560" height="1409" />
     </state>
-    <state x="858" y="441" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1595792027710" />
+    <state x="858" y="441" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596912681007" />
     <state x="-1854" y="-8" width="1654" height="1038" maximized="true" key="dock-window-1" timestamp="1596649766418">
       <screen x="-1920" y="0" width="1920" height="1050" />
     </state>
@@ -192,8 +199,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Minmax.java</url>
-          <line>158</line>
-          <option name="timeStamp" value="44" />
+          <line>91</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -204,35 +211,6 @@
         <watch expression="possibleMoves.get(0)" language="JAVA" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>board.board</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>board.printBoard();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>points</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>heuristic</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>possibleMoves</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
   </component>
   <component name="masterDetails">
     <states>
