@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -7,13 +6,18 @@ public class Board {
     private int[][] board = new int[BOARDSIZE][BOARDSIZE];
     public int playerType;
     public int AIColor;
-    public int numberOfRedPiece=16;
-    public int numberOfBlackPiece=16;
+    public int redPieces=16;
+    public int blackPieces=16;
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
-    public boolean didIWin = false;
-    public int heuristicPoints;
+    public int value;
+    public boolean redWin=false;
+    public boolean blackWin=false;
+    public boolean playerWin=false;
+    public boolean AIWin=false;
+
+
 
     public Board(String Board, int playerType){
 
@@ -114,9 +118,9 @@ public class Board {
     public void move(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
             if(board[toRow][toColumn]==BLACK)
-                numberOfBlackPiece--;
+                blackPieces--;
             else if(board[toRow][toColumn]==RED)
-                numberOfRedPiece--;
+                redPieces--;
             board[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
             board[fromRow][fromColumn] = EMPTY;
             //didIwin();
@@ -164,16 +168,32 @@ public class Board {
 
     private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, Board tempBoard, ArrayList<Board> possibleMoves){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
-            if(tempBoard.getBoard()[toRow][toColumn]==BLACK && playerColor == RED)
-                tempBoard.numberOfBlackPiece--;
-            else if(tempBoard.getBoard()[toRow][toColumn]==RED && playerColor == BLACK)
-                tempBoard.numberOfRedPiece--;
+            if (toRow == 7 && playerColor==BLACK){
+                tempBoard.playerWin = true;
+                tempBoard.AIWin=false;
+            }else if(toRow == 7 && playerColor==RED){
+                tempBoard.playerWin = false;
+                tempBoard.AIWin=true;
+            }
+            if (toRow == 0 && playerColor==RED){
+                tempBoard.playerWin = true;
+                tempBoard.AIWin=false;
+            }else if(toRow == 0 && playerColor==BLACK){
+                tempBoard.playerWin = false;
+                tempBoard.AIWin=true;
+            }
+            if(tempBoard.getBoard()[toRow][toColumn]==BLACK && playerColor == RED) {
+                tempBoard.blackPieces--;
+            }
+            else if(tempBoard.getBoard()[toRow][toColumn]==RED && playerColor == BLACK) {
+                tempBoard.redPieces--;
+            }
+
             tempBoard.modifyBoard(toRow,toColumn,getPieceAt(fromRow, fromColumn));
             tempBoard.modifyBoard(fromRow, fromColumn, EMPTY);
+
             possibleMoves.add(tempBoard);
-            if (toRow == 7 || toRow == 0){
-                didIWin = true;
-            }
+
         }
     }
     public int[][] CopyArray(int[][] original){
