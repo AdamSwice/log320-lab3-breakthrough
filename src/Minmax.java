@@ -12,16 +12,16 @@ public class Minmax {
     public final int RED = 4;
     public final int EMPTY = 0;
     public final int WinValue = 500000;
-    public final short PieceAlmostWinValue = 10000;
+    public final short PieceAlmostWinValue = 10;
     public final short PieceValue = 1300;
-    public final short PieceDangerValue = 5000;
-    public final short PieceHighDangerValue = 10000;
-    public final short PieceAttackValue = 250;
-    public final short PieceProtectionValue = 700;
-    public final short PieceConnectionHValue = 100;
-    public final short PieceConnectionVValue = 100;
+    public final short PieceDangerValue = 10;
+    public final short PieceHighDangerValue = 100;
+    public final short PieceAttackValue = 50;
+    public final short PieceProtectionValue = 65;
+    public final short PieceConnectionHValue = 35;
+    public final short PieceConnectionVValue = 15;
     public final short PieceColumnHoleValue = 20;
-    public final short PieceHomeGroundValue = 500;
+    public final short PieceHomeGroundValue = 10;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -169,7 +169,7 @@ public class Minmax {
                     continue;
                 if (gameBoard[i][j]==RED) {
                     RedPiecesOnColumn++;
-                    board.value += GetPieceValue(gameBoard, i, j);
+                    Points += GetPieceValue(gameBoard, i, j);
                     if (i == 0)
                         board.redWin = true;
                     else if (i == 1) {
@@ -179,16 +179,16 @@ public class Minmax {
                             threatA = (gameBoard[i - 1][0] == EMPTY);
                         if (j > 7)
                             threatB = (gameBoard[i + 1][0] == EMPTY);
-                        if (!(threatA && threatB))
+                        if ((threatA && threatB))
                             //ici truc wierd
-                            board.value += PieceAlmostWinValue;
+                            Points += PieceAlmostWinValue;
                     } else if (i == 7)
-                        board.value += PieceHomeGroundValue;
+                        Points += PieceHomeGroundValue;
                 }
                 else{
                     BlackPiecesOnColumn++;
-                    board.value -= GetPieceValue(gameBoard, i, j);
-                    if (i == 0)
+                    Points-= GetPieceValue(gameBoard, i, j);
+                    if (i == 7)
                         board.blackWin = true;
                     else if (i == 6) {
                         boolean threatA = false;
@@ -197,18 +197,18 @@ public class Minmax {
                             threatA = (gameBoard[i - 1][7] == EMPTY);
                         if (j > 7)
                             threatB = (gameBoard[i + 1][7] == EMPTY);
-                        if (!(threatA && threatB))
+                        if ((threatA && threatB))
                             //ici truc wierd
-                            board.value -= PieceAlmostWinValue;
+                            Points-= PieceAlmostWinValue;
                     } else if (i == 0)
-                        board.value -= PieceHomeGroundValue;
+                        Points -= PieceHomeGroundValue;
 
                 }
             }
             if(RedPiecesOnColumn==0)
-                board.value -=PieceColumnHoleValue;
+                Points -=PieceColumnHoleValue;
             if(BlackPiecesOnColumn==0)
-                board.value +=PieceColumnHoleValue;
+                Points +=PieceColumnHoleValue;
         }
         if(board.blackPieces==0)
             board.redWin=true;
@@ -216,13 +216,13 @@ public class Minmax {
             board.blackWin=true;
 
         if(board.redWin)
-            board.value+=WinValue;
+            Points+=WinValue;
         if(board.blackWin)
-            board.value-=WinValue;
+            Points-=WinValue;
 //        if(colorMoving==BLACK){
 //            board.value=-board.value;
 //        }
-           return board.value;
+           return Points;
     }
 
     public int GetPieceValue(int[][] board, int i, int j){
