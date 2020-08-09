@@ -11,17 +11,17 @@ public class Minmax {
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
-    public final int WinValue = 500000;
-    public final short PieceAlmostWinValue = 100;
+    public final int WinValue = 50000;
+    public final short PieceAlmostWinValue = 10000;
     public final short PieceValue = 1300;
-    public final short PieceDangerValue = 10;
-    public final short PieceHighDangerValue = 50;
-    public final short PieceAttackValue = 35;
-    public final short PieceProtectionValue = 100;
-    public final short PieceConnectionHValue = 35;
-    public final short PieceConnectionVValue = 15;
+    public final short PieceDangerValue = 200;
+    public final short PieceHighDangerValue = 250;
+    public final short PieceAttackValue = 150;
+    public final int PieceProtectionValue = 120;
+    public final int PieceConnectionHValue = 35;
+    public final int PieceConnectionVValue = 15;
     public final short PieceColumnHoleValue = 20;
-    public final short PieceHomeGroundValue = 150;
+    public final int PieceHomeGroundValue = 100;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -88,6 +88,7 @@ public class Minmax {
                 i--;
             }
         }
+
         //TODO : renvoyer l'indexe de qui sera retourner dans l'heuristique
         return possibleMoves.get(random.nextInt(possibleMoves.size())).getBoard();
     }
@@ -95,7 +96,7 @@ public class Minmax {
     private double minimax(Board board, int depth, boolean currentPlayer, double alpha, double beta){
         Board tempBoard = null;
         if (depth == 0 || board.playerWin || board.AIWin) {
-            return getHeuristic(board,depth);
+            return getHeuristic(board,depth,currentPlayer);
         }
 
         if(currentPlayer) {
@@ -139,17 +140,17 @@ public class Minmax {
 
     }
 
-    private double getHeuristic(Board board,int depth){
+    private double getHeuristic(Board board,int depth,boolean currentplayer){
         //TODO: doesnt make bad moves necessarily, but doesnt defend itself... WIP.
 
 
-        return stategieDeff(board,depth);
+        return stategieDeff(board,depth,currentplayer);
     }
 
 
 
 
-    public double stategieDeff(Board board,int depth){
+    public double stategieDeff(Board board,int depth,boolean currentplayer){
         double Points=0;
         int RemainingRedPieces = 0;
         int RemainingBlackPieces = 0;
@@ -160,27 +161,35 @@ public class Minmax {
             int RedPiecesOnColumn = 0;
 
             for(int i=0;i<gameBoard.length;i++){
+
                 if(gameBoard[i][j]==EMPTY)
                     continue;
+
                 if (gameBoard[i][j]==RED) {
+                    RemainingRedPieces++;
                     RedPiecesOnColumn++;
                     Points += GetPieceValue(gameBoard, i, j);
+
                     if (i == 0)
                         board.redWin = true;
+
                     else if (i == 1) {
                         boolean threatA = false;
                         boolean threatB = false;
+
                         if (j > 0)
                             threatA = (gameBoard[0][j-1] == EMPTY);
-                        if (j > 7)
+
+                        if (j < 7)
                             threatB = (gameBoard[0][j+1] == EMPTY);
+                        //ici truc wierd
                         if ((threatA && threatB))
-                            //ici truc wierd
                             Points += PieceAlmostWinValue;
                     } else if (i == 7)
                         Points += PieceHomeGroundValue;
                 }
                 else{
+                    RemainingBlackPieces++;
                     BlackPiecesOnColumn++;
                     Points-= GetPieceValue(gameBoard, i, j);
                     if (i == 7)
@@ -190,10 +199,10 @@ public class Minmax {
                         boolean threatB = false;
                         if (j > 0)
                             threatA = (gameBoard[7][j-1] == EMPTY);
-                        if (j > 7)
+                        if (j < 7)
                             threatB = (gameBoard[7][j+1] == EMPTY);
+                        //ici truc wierd
                         if ((threatA && threatB))
-                            //ici truc wierd
                             Points-= PieceAlmostWinValue;
                     } else if (i == 0)
                         Points -= PieceHomeGroundValue;
@@ -205,34 +214,37 @@ public class Minmax {
             if(BlackPiecesOnColumn==0)
                 Points +=PieceColumnHoleValue;
         }
-        if(board.blackPieces==0)
+        if(RemainingBlackPieces==0)
             board.redWin=true;
-        if(board.blackPieces==0)
+        if(RemainingRedPieces==0)
             board.blackWin=true;
 
         if(board.redWin)
-            Points+=depth*WinValue;
+            Points+=(depth*WinValue);
         if(board.blackWin)
-            Points-=depth*WinValue;
-//        if(colorMoving==BLACK){
-//            board.value=-board.value;
-//        }
+            Points-=(depth*WinValue);
+        if(currentplayer){
+            Points=-Points;
+        }
            return Points;
     }
 
     public int GetPieceValue(int[][] board, int i, int j){
         int value=PieceValue;
         int protectionValue=0;
-        int attackValue=0;
-        if(confirmHConnection(board,i,j))
-            value+=PieceConnectionHValue;
-        if(confirmVConnection(board,i,j))
-            value+=PieceConnectionVValue;
-        if(i<7 && i>0) {
-            protectionValue = confirmprotectionValue(board, i, j);
-            value += protectionValue;
-        }
+        int attackValue;
 
+        if((i<6 && board[i][j]==RED)||(i>1 && board[i][j]==BLACK) ) {
+            if (confirmHConnection(board, i, j))
+                value += PieceConnectionHValue;
+            if (confirmVConnection(board, i, j))
+                value += PieceConnectionVValue;
+
+            if (i < 7 && i > 0) {
+                protectionValue = confirmprotectionValue(board, i, j);
+                value += protectionValue;
+            }
+        }
         attackValue=confirmAttackedValue(board,i,j);
         if(attackValue > 0 ) {
             value -= attackValue;
@@ -338,12 +350,12 @@ public class Minmax {
             if(board[i][j]==RED) {
                 if(i>0) {
                     if (board[i - 1][j - 1] == BLACK)
-                        attackedValue += PieceAttackValue;
+                        attackedValue += (8-i)*PieceAttackValue;
                 }
             }else if(board[i][j]==BLACK){
                 if(i<7) {
                     if (board[i + 1][j - 1] == RED)
-                        attackedValue += PieceAttackValue;
+                        attackedValue += i*PieceAttackValue;
                 }
             }
         }
@@ -352,12 +364,12 @@ public class Minmax {
             if(board[i][j]==RED) {
                 if(i>0) {
                     if (board[i - 1][j + 1] == BLACK)
-                        attackedValue += PieceAttackValue;
+                        attackedValue += (8-i)*PieceAttackValue;
                 }
             }else if(board[i][j]==BLACK){
                 if(i<7) {
                     if (board[i + 1][j + 1] == RED)
-                        attackedValue += PieceAttackValue;
+                        attackedValue += i*PieceAttackValue;
                 }
             }
         }
