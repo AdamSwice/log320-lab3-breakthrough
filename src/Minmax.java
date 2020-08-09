@@ -19,7 +19,7 @@ public class Minmax {
     public final int PieceHomeGroundValue = 500;
 
     public final short AttackedPieceValue = 125;
-    public final short PieceValue = 5;
+    public final short PieceValue = 20;
     public final int PieceProtectionValue = 15;
     public final int PieceConnectionVValue = 15;
     public final int PieceConnectionHValue = 15;
@@ -184,7 +184,8 @@ public class Minmax {
                 else{
                     BlackPiecesOnColumn++;
                     //Points-= GetPieceValue(gameBoard, i, j);
-                    Points-= i*10;
+                    Points-= i*i*i;
+
                     if (i == 7)
                         board.blackWin = true;
 //                    else if (i == 6) {
@@ -211,7 +212,7 @@ public class Minmax {
             if(BlackPiecesOnColumn==0)
                 Points += PieceColumnHoleValue;
         }
-        Points+=3*RemainingRedPieces-4*RemainingBlackPieces;
+        Points+=10*RemainingRedPieces-5*RemainingBlackPieces;
         if(board.blackPieces==0)
             board.redWin=true;
         if(board.blackPieces==0)
@@ -228,7 +229,7 @@ public class Minmax {
     }
 
     public int GetPieceValue(int[][] board, int i, int j){
-        int value=(i+1)*PieceValue;
+        int value=(i*i)*PieceValue;
         int protectionValue=0;
         int attackValue=confirmAttackedValue(board,i,j);
 
@@ -268,7 +269,7 @@ public class Minmax {
 //        else
 //            value+= (8-i)*PieceDangerValue;
 
-        return value;
+        return (int) value;
     }
 
     public boolean confirmHConnection(int[][] board, int i, int j){
