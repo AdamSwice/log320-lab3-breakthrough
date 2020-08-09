@@ -12,16 +12,17 @@ public class Minmax {
     public final int RED = 4;
     public final int EMPTY = 0;
     public final int WinValue = 500000;
-    public final short PieceAlmostWinValue = 100;
-    public final short PieceValue = 1300;
+    public final short PieceAlmostWinValue = 10;
     public final short PieceDangerValue = 10;
-    public final short PieceHighDangerValue = 50;
-    public final short PieceAttackValue = 35;
-    public final short PieceProtectionValue = 100;
-    public final short PieceConnectionHValue = 35;
-    public final short PieceConnectionVValue = 15;
-    public final short PieceColumnHoleValue = 20;
-    public final short PieceHomeGroundValue = 150;
+    public final short PieceHighDangerValue = 100;
+    public final short PieceColumnHoleValue = 40;
+    public final int PieceHomeGroundValue = 25;
+
+    public final short AttackedPieceValue = 50;
+    public final short PieceValue = 100;
+    public final int PieceProtectionValue = 30;
+    public final int PieceConnectionVValue = 15;
+    public final int PieceConnectionHValue = 15;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -69,7 +70,7 @@ public class Minmax {
             Board tempBoard =possibleMoves.get(i);
             //TODO:
 
-            heuristic.add(minimax(tempBoard, depth - 1,humanPlayer, alpha, beta));
+            heuristic.add(minimax(tempBoard, depth - 1, !humanPlayer, alpha, beta));
         }
 
         double maxHeuristics = Double.NEGATIVE_INFINITY;
@@ -167,17 +168,17 @@ public class Minmax {
                     Points += GetPieceValue(gameBoard, i, j);
                     if (i == 0)
                         board.redWin = true;
-                    else if (i == 1) {
-                        boolean threatA = false;
-                        boolean threatB = false;
-                        if (j > 0)
-                            threatA = (gameBoard[0][j-1] == EMPTY);
-                        if (j > 7)
-                            threatB = (gameBoard[0][j+1] == EMPTY);
-                        if ((threatA && threatB))
-                            //ici truc wierd
-                            Points += PieceAlmostWinValue;
-                    } else if (i == 7)
+//                    else if (i == 1) {
+//                        boolean threatA = false;
+//                        boolean threatB = false;
+//                        if (j > 0)
+//                            threatA = (gameBoard[0][j-1] == EMPTY);
+//                        if (j > 7)
+//                            threatB = (gameBoard[0][j+1] == EMPTY);
+//                        if ((threatA && threatB))
+//                            //ici truc wierd
+//                            Points += PieceAlmostWinValue;
+                    if (i == 7)
                         Points += PieceHomeGroundValue;
                 }
                 else{
@@ -185,25 +186,29 @@ public class Minmax {
                     Points-= GetPieceValue(gameBoard, i, j);
                     if (i == 7)
                         board.blackWin = true;
-                    else if (i == 6) {
-                        boolean threatA = false;
-                        boolean threatB = false;
-                        if (j > 0)
-                            threatA = (gameBoard[7][j-1] == EMPTY);
-                        if (j > 7)
-                            threatB = (gameBoard[7][j+1] == EMPTY);
-                        if ((threatA && threatB))
-                            //ici truc wierd
-                            Points-= PieceAlmostWinValue;
-                    } else if (i == 0)
-                        Points -= PieceHomeGroundValue;
+//                    else if (i == 6) {
+//                        boolean threatA = false;
+//                        boolean threatB = false;
+//                        if (j > 0)
+//                            threatA = (gameBoard[7][j-1] == EMPTY);
+//                        if (j > 7)
+//                            threatB = (gameBoard[7][j+1] == EMPTY);
+//                        if ((threatA && threatB))
+//                            //ici truc wierd
+//                            Points-= PieceAlmostWinValue;
+//                    } else if (i == 0)
+//                        Points -= PieceHomeGroundValue;
 
                 }
+                RemainingRedPieces+= RedPiecesOnColumn;
+                RemainingBlackPieces+= BlackPiecesOnColumn;
             }
+            if(RemainingRedPieces > RemainingBlackPieces);
+                Points+=75;
             if(RedPiecesOnColumn==0)
-                Points -=PieceColumnHoleValue;
+                Points -= PieceColumnHoleValue;
             if(BlackPiecesOnColumn==0)
-                Points +=PieceColumnHoleValue;
+                Points += PieceColumnHoleValue;
         }
         if(board.blackPieces==0)
             board.redWin=true;
@@ -221,9 +226,10 @@ public class Minmax {
     }
 
     public int GetPieceValue(int[][] board, int i, int j){
-        int value=PieceValue;
+        int value=PieceValue - 2*i;
         int protectionValue=0;
-        int attackValue=0;
+        int attackValue=confirmAttackedValue(board,i,j);
+
         if(confirmHConnection(board,i,j))
             value+=PieceConnectionHValue;
         if(confirmVConnection(board,i,j))
@@ -233,34 +239,33 @@ public class Minmax {
             value += protectionValue;
         }
 
-        attackValue=confirmAttackedValue(board,i,j);
+
         if(attackValue > 0 ) {
             value -= attackValue;
-            if (protectionValue == 0)
+            if (protectionValue < attackValue)
                 value -= attackValue;
         }else{
             if(protectionValue !=0){
                 if(board[i][j]==RED){
-                    if(i==1)
-                        value+=PieceHighDangerValue;
-                    else if(i==2)
-                        value+=PieceDangerValue;
+//                    if(i==1)
+//                        value+=PieceHighDangerValue;
+//                    else if(i==2)
+//                        value+=PieceDangerValue;
                 }else if(board[i][j]==BLACK){
-                    if(i==6)
-                        value+=PieceHighDangerValue;
-                    else if(i==5)
-                        value+=PieceDangerValue;
+//                    if(i==6)
+//                        value+=PieceHighDangerValue;
+//                    else if(i==5)
+//                        value+=PieceDangerValue;
                 }
             }
         }
 
-        if(board[i][j]==BLACK)
-            value+= i*PieceDangerValue;
-        else
-            value+= (8-i)*PieceDangerValue;
+//        if(board[i][j]==BLACK)
+//            value+= i*PieceDangerValue;
+//        else
+//            value+= (8-i)*PieceDangerValue;
 
         return value;
-
     }
 
     public boolean confirmHConnection(int[][] board, int i, int j){
@@ -268,7 +273,7 @@ public class Minmax {
         if (j > 0)
         {
 
-            if (board[i][j-1] ==board[i][j])
+            if (board[i][j-1] == board[i][j])
             {
                 return true;
             }
@@ -286,7 +291,7 @@ public class Minmax {
 
     public boolean confirmVConnection(int[][] board, int i, int j){
 
-        if (i > 0)
+        if (i > 1)
         {
 
             if (board[i-1][j] ==board[i][j])
@@ -294,7 +299,7 @@ public class Minmax {
                 return true;
             }
         }
-        if (i < 7)
+        if (i < 6)
         {
 
             if (board[i+1][j] ==board[i][j])
@@ -310,20 +315,24 @@ public class Minmax {
         if (j > 0)
         {
             if(board[i][j]==RED) {
-                if (board[i + 1][j - 1] == board[i][j])
+                int protectedRow = i - 1 <= 0 ? 0 : i - 1;
+                if (board[protectedRow][j - 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }else if(board[i][j]==BLACK){
-                if (board[i - 1][j - 1] == board[i][j])
+                int protectedRow = i + 1 >= 7 ? 7 : i + 1;
+                if (board[protectedRow][j - 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }
         }
         if (j < 7)
         {
             if(board[i][j]==RED) {
-                if (board[i + 1][j + 1] == board[i][j])
+                int protectedRow = i - 1 <= 0 ? 0 : i - 1;
+                if (board[protectedRow][j + 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }else if(board[i][j]==BLACK){
-                if (board[i - 1][j + 1] == board[i][j])
+                int protectedRow = i + 1 >= 7 ? 7 : i + 1;
+                if (board[protectedRow][j + 1] == board[i][j])
                     protectionValue += PieceProtectionValue;
             }
         }
@@ -336,28 +345,32 @@ public class Minmax {
         {
 
             if(board[i][j]==RED) {
-                if(i>0) {
-                    if (board[i - 1][j - 1] == BLACK)
-                        attackedValue += PieceAttackValue;
+                if(i>=0) {
+                    int attackersRow = i - 1 <= 0 ? 0 : i - 1;
+                    if (board[attackersRow][j - 1] == BLACK)
+                        attackedValue += AttackedPieceValue;
                 }
             }else if(board[i][j]==BLACK){
-                if(i<7) {
-                    if (board[i + 1][j - 1] == RED)
-                        attackedValue += PieceAttackValue;
+                if(i<=7) {
+                    int attackersRow = i + 1 >= 7 ? 7 : i + 1;
+                    if (board[attackersRow][j - 1] == RED)
+                        attackedValue += AttackedPieceValue;
                 }
             }
         }
         if (j < 7)
         {
             if(board[i][j]==RED) {
-                if(i>0) {
-                    if (board[i - 1][j + 1] == BLACK)
-                        attackedValue += PieceAttackValue;
+                if(i>=0) {
+                    int attackersRow = i - 1 <= 0 ? 0 : i - 1;
+                    if (board[attackersRow][j + 1] == BLACK)
+                        attackedValue += AttackedPieceValue;
                 }
             }else if(board[i][j]==BLACK){
-                if(i<7) {
-                    if (board[i + 1][j + 1] == RED)
-                        attackedValue += PieceAttackValue;
+                if(i<=7) {
+                    int attackersRow = i + 1 >= 7 ? 7 : i + 1;
+                    if (board[attackersRow][j + 1] == RED)
+                        attackedValue += AttackedPieceValue;
                 }
             }
         }
