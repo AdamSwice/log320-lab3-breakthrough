@@ -16,13 +16,13 @@ public class Minmax {
     public final short PieceDangerValue = 10;
     public final short PieceHighDangerValue = 100;
     public final short PieceColumnHoleValue = 250;
-    public final int PieceHomeGroundValue = 500;
+    public final int PieceHomeGroundValue = 3000;
 
     public final short AttackedPieceValue = 125;
-    public final short PieceValue = 20;
-    public final int PieceProtectionValue = 15;
-    public final int PieceConnectionVValue = 15;
-    public final int PieceConnectionHValue = 15;
+    public final short PieceValue = 30;
+    public final int PieceProtectionValue = 50;
+    public final int PieceConnectionVValue = 25;
+    public final int PieceConnectionHValue = 40;
 
     public Minmax(Board board, int depth){
         this.boardObject = board;
@@ -212,7 +212,7 @@ public class Minmax {
             if(BlackPiecesOnColumn==0)
                 Points += PieceColumnHoleValue;
         }
-        Points+=10*RemainingRedPieces-5*RemainingBlackPieces;
+        Points+=10*RemainingRedPieces-7*RemainingBlackPieces;
         if(board.blackPieces==0)
             board.redWin=true;
         if(board.blackPieces==0)
