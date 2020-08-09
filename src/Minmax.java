@@ -55,7 +55,7 @@ public class Minmax {
         }
         move=util.getConvertedOutputMoveValues(positionInitial);
         move+=util.getConvertedOutputMoveValues(positionFinale);
-       return move;
+        return move;
     }
 
     private int[][] minimaxStart(int depth, boolean humanPlayer){
@@ -204,7 +204,7 @@ public class Minmax {
                 RemainingBlackPieces+= BlackPiecesOnColumn;
             }
             if(RemainingRedPieces > RemainingBlackPieces);
-                Points+=75;
+            Points+=75;
             if(RedPiecesOnColumn==0)
                 Points -= PieceColumnHoleValue;
             if(BlackPiecesOnColumn==0)
@@ -222,7 +222,7 @@ public class Minmax {
 //        if(colorMoving==BLACK){
 //            board.value=-board.value;
 //        }
-           return Points;
+        return Points;
     }
 
     public int GetPieceValue(int[][] board, int i, int j){
