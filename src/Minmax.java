@@ -205,12 +205,13 @@ public class Minmax {
                 RemainingBlackPieces+= BlackPiecesOnColumn;
             }
 //            if(RemainingRedPieces > RemainingBlackPieces);
-                Points+=3*RemainingRedPieces-2*RemainingBlackPieces;
+
             if(RedPiecesOnColumn==0)
                 Points -= PieceColumnHoleValue;
             if(BlackPiecesOnColumn==0)
                 Points += PieceColumnHoleValue;
         }
+        Points+=3*RemainingRedPieces-4*RemainingBlackPieces;
         if(board.blackPieces==0)
             board.redWin=true;
         if(board.blackPieces==0)
