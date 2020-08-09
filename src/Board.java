@@ -206,6 +206,7 @@ public class Board {
         return newBoard;
     }
 
+    //TODO: move attackedValue to makemoveandreturnboard pour filtrer.
 
     public int getPlayerType() {
         return playerType;

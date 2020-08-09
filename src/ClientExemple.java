@@ -66,7 +66,7 @@ class ClientExemple {
                     String s = new String(aBuffer).trim();
                     System.out.println(s);
                     board = new Board(s, 2);
-                    homeAI = new Minmax(board, 4);
+                    homeAI = new Minmax(board, 3);
                     strategy = new Strategy(board);
                     opponentColor = 4;
                 }
