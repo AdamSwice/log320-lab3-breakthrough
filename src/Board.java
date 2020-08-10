@@ -168,17 +168,17 @@ public class Board {
 
     private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, Board tempBoard, ArrayList<Board> possibleMoves){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
-            if (toRow == 7 && playerColor==BLACK){
+            if (toRow == 7 && tempBoard.AIColor!=BLACK){
                 tempBoard.playerWin = true;
                 tempBoard.AIWin=false;
-            }else if(toRow == 7 && playerColor==RED){
+            }else if(toRow == 7 && tempBoard.AIColor==BLACK){
                 tempBoard.playerWin = false;
                 tempBoard.AIWin=true;
             }
-            if (toRow == 0 && playerColor==RED){
+            if (toRow == 0 && tempBoard.AIColor!=BLACK){
                 tempBoard.playerWin = true;
                 tempBoard.AIWin=false;
-            }else if(toRow == 0 && playerColor==BLACK){
+            }else if(toRow == 0 && tempBoard.AIColor==BLACK){
                 tempBoard.playerWin = false;
                 tempBoard.AIWin=true;
             }

@@ -4,6 +4,7 @@
     <list default="true" id="96be029f-06aa-4d92-b912-9f9ee07d1528" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Minmax.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/log320-lab3-breakthrough/Minmax.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Minmax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Minmax.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,45 +15,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Minmax.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="408" column="48" lean-forward="true" selection-start-line="408" selection-start-column="48" selection-end-line="408" selection-end-column="48" />
-              <folding>
-                <element signature="e#14930#14931#0" expanded="true" />
-                <element signature="e#14972#14973#0" expanded="true" />
-                <element signature="e#15019#15020#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ClientExemple.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Board.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3621">
-              <caret line="229" selection-start-line="229" selection-end-line="229" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -60,62 +22,10 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>protection</find>
-      <find>getHeuristic</find>
-      <find>PieceAttack</find>
-      <find>homeGround</find>
-      <find>boardObject</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Minmax.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="162" />
-    <option name="y" value="-8" />
-    <option name="width" value="1440" />
-    <option name="height" value="780" />
-  </component>
   <component name="ProjectId" id="1eYYKOjOXghVYKZ115e7nEQJEIL" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="log320-lab3-breakthrough" type="b2602c69:ProjectViewProjectNode" />
-              <item name="log320-lab3-breakthrough" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="log320-lab3-breakthrough" type="b2602c69:ProjectViewProjectNode" />
-              <item name="log320-lab3-breakthrough" type="462c0819:PsiDirectoryNode" />
-              <item name="Breakthrough_win10" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="log320-lab3-breakthrough" type="b2602c69:ProjectViewProjectNode" />
-              <item name="log320-lab3-breakthrough" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -127,18 +37,6 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="run" type="Application" factoryName="Application">
@@ -220,41 +118,6 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="45267000" />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -271,9 +134,15 @@
     </state>
     <state x="815" y="303" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1594672786101" />
     <state x="1086" y="406" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1594668980425" />
-    <state x="-532" y="323" width="490" height="594" key="#xdebugger.evaluate" timestamp="1596914598985">
-      <screen x="-1920" y="0" width="1920" height="1050" />
+    <state x="761" y="351" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1597085497104">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="761" y="351" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597085497104" />
+    <state x="880" y="271" width="490" height="594" key="#xdebugger.evaluate" timestamp="1597085740284">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="880" y="271" key="#xdebugger.evaluate/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597085740284" />
+    <state x="880" y="271" key="#xdebugger.evaluate/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597076071202" />
     <state x="673" y="257" key="#xdebugger.evaluate/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1594675878726" />
     <state x="-532" y="323" width="490" height="594" key="#xdebugger.evaluate/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596914598985" />
     <state x="819" y="160" key="CommitChangelistDialog2" timestamp="1596916609919">
@@ -285,52 +154,68 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="451" height="466" key="DebuggerActiveHint/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595537764578" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1597013781761">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781761" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597079507877" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1877" height="74" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
     <state width="1597" height="354" key="GridCell.Tab.0.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596920169114" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1597013781760">
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781760" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597079507877" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296283" />
     <state width="1877" height="74" key="GridCell.Tab.0.center/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
     <state width="1597" height="354" key="GridCell.Tab.0.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596920169114" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1597013781760">
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781760" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597079507876" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296283" />
     <state width="1877" height="74" key="GridCell.Tab.0.left/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
     <state width="1597" height="354" key="GridCell.Tab.0.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596920169114" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1597013781760">
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781760" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597079507877" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1877" height="74" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648663513" />
     <state width="1597" height="354" key="GridCell.Tab.0.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596920169114" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1597013781761">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1597086975917">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781761" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975917" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597077584198" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1123" height="351" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
     <state width="1279" height="1352" key="GridCell.Tab.1.bottom/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596915901427" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1597013781761">
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781761" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597077584198" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1123" height="351" key="GridCell.Tab.1.center/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
     <state width="1279" height="1352" key="GridCell.Tab.1.center/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596915901427" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1597013781761">
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781761" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597077584198" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1123" height="351" key="GridCell.Tab.1.left/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
     <state width="1279" height="1352" key="GridCell.Tab.1.left/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596915901427" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1597013781761">
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1597086975916">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597013781761" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597086975916" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1597077584198" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1597024296284" />
     <state width="1123" height="351" key="GridCell.Tab.1.right/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539410312" />
     <state width="1279" height="1352" key="GridCell.Tab.1.right/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596915901427" />
     <state x="736" y="345" key="Vcs.Push.Dialog.v2" timestamp="1596916617106">
@@ -338,9 +223,10 @@
     </state>
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1595539405190" />
     <state x="736" y="345" key="Vcs.Push.Dialog.v2/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596916617106" />
-    <state x="977" y="529" key="com.intellij.ide.util.TipDialog" timestamp="1596892807120">
-      <screen x="0" y="0" width="2560" height="1409" />
+    <state x="733" y="390" key="com.intellij.ide.util.TipDialog" timestamp="1597067251054">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="733" y="390" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1920.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597067251054" />
     <state x="733" y="394" key="com.intellij.ide.util.TipDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1596648677610" />
     <state x="977" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596892807120" />
     <state x="977" y="529" key="com.intellij.ide.util.TipDialog/0.0.2560.1410/-1920.0.1920.1050@0.0.2560.1410" timestamp="1596648384981" />
@@ -362,6 +248,15 @@
     <state x="731" y="325" key="new project wizard/0.0.2560.1409/-1920.0.1920.1050@0.0.2560.1409" timestamp="1596893251880" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Minmax.java</url>
+          <line>210</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="possibleMoves.get(1)[2]" />
@@ -370,46 +265,6 @@
         <watch expression="heuristic.get(0)" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>gameBoard;</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3621">
-          <caret line="229" selection-start-line="229" selection-end-line="229" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientExemple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Minmax.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="408" column="48" lean-forward="true" selection-start-line="408" selection-start-column="48" selection-end-line="408" selection-end-column="48" />
-          <folding>
-            <element signature="e#14930#14931#0" expanded="true" />
-            <element signature="e#14972#14973#0" expanded="true" />
-            <element signature="e#15019#15020#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
