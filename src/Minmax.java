@@ -96,7 +96,7 @@ public class Minmax {
     private double minimax(Board board, int depth, boolean currentPlayer, double alpha, double beta){
         Board tempBoard = null;
         if (depth == 0 || board.playerWin || board.AIWin) {
-            return getHeuristic(board,depth);
+            return getHeuristic(board,depth, boardObject.playerType);
         }
 
         if(currentPlayer) {
@@ -140,95 +140,115 @@ public class Minmax {
 
     }
 
-    private double getHeuristic(Board board,int depth){
+    private double getHeuristic(Board board,int depth, int playerColor){
         //TODO: doesnt make bad moves necessarily, but doesnt defend itself... WIP.
 
 
-        return stategieDeff(board,depth);
+        return stategieDeff(board,depth, playerColor);
     }
 
 
 
 
-    public double stategieDeff(Board board,int depth){
-        double Points=0;
-        int RemainingRedPieces = 0;
-        int RemainingBlackPieces = 0;
+    public double stategieDeff(Board board,int depth, int playerColor){
+        if (playerColor == RED){
+            double Points=0;
+            int RemainingRedPieces = 0;
+            int RemainingBlackPieces = 0;
 
-        int gameBoard[][]=board.getBoard();
-        for(int j=0;j<gameBoard[0].length;j++) {
-            int BlackPiecesOnColumn = 0;
-            int RedPiecesOnColumn = 0;
+            int gameBoard[][]=board.getBoard();
+            for(int j=0;j<gameBoard[0].length;j++) {
+                int BlackPiecesOnColumn = 0;
+                int RedPiecesOnColumn = 0;
 
-            for(int i=0;i<gameBoard.length;i++){
-                if(gameBoard[i][j]==EMPTY)
-                    continue;
-                if (gameBoard[i][j]==RED) {
-                    RedPiecesOnColumn++;
-                    Points += GetPieceValue(gameBoard, i, j);
-                    if (i == 0)
-                        board.redWin = true;
-//                    else if (i == 1) {
-//                        boolean threatA = false;
-//                        boolean threatB = false;
-//                        if (j > 0)
-//                            threatA = (gameBoard[0][j-1] == EMPTY);
-//                        if (j > 7)
-//                            threatB = (gameBoard[0][j+1] == EMPTY);
-//                        if ((threatA && threatB))
-//                            //ici truc wierd
-//                            Points += PieceAlmostWinValue;
-                    if (i == 7)
-                        Points += PieceHomeGroundValue;
+                for(int i=0;i<gameBoard.length;i++){
+                    if(gameBoard[i][j]==EMPTY)
+                        continue;
+                    if (gameBoard[i][j]==RED) {
+                        RedPiecesOnColumn++;
+                        Points += GetPieceValue(gameBoard, i, j, playerColor);
+                        if (i == 0)
+                            board.redWin = true;
+                        if (i == 7)
+                            Points += PieceHomeGroundValue;
+                    }
+                    else{
+                        BlackPiecesOnColumn++;
+                        Points-= i*i*i;
+
+                        if (i == 7)
+                            board.blackWin = true;
+                    }
+                    RemainingRedPieces+= RedPiecesOnColumn;
+                    RemainingBlackPieces+= BlackPiecesOnColumn;
                 }
-                else{
-                    BlackPiecesOnColumn++;
-                    //Points-= GetPieceValue(gameBoard, i, j);
-                    Points-= i*i*i;
-
-                    if (i == 7)
-                        board.blackWin = true;
-//                    else if (i == 6) {
-//                        boolean threatA = false;
-//                        boolean threatB = false;
-//                        if (j > 0)
-//                            threatA = (gameBoard[7][j-1] == EMPTY);
-//                        if (j > 7)
-//                            threatB = (gameBoard[7][j+1] == EMPTY);
-//                        if ((threatA && threatB))
-//                            //ici truc wierd
-//                            Points-= PieceAlmostWinValue;
-//                    } else if (i == 0)
-//                        Points -= PieceHomeGroundValue;
-
-                }
-                RemainingRedPieces+= RedPiecesOnColumn;
-                RemainingBlackPieces+= BlackPiecesOnColumn;
+                if(RedPiecesOnColumn==0)
+                    Points -= PieceColumnHoleValue;
+                if(BlackPiecesOnColumn==0)
+                    Points += PieceColumnHoleValue;
             }
-//            if(RemainingRedPieces > RemainingBlackPieces);
+            Points+=10*RemainingRedPieces-7*RemainingBlackPieces;
+            if(board.blackPieces==0)
+                board.redWin=true;
+            if(board.blackPieces==0)
+                board.blackWin=true;
 
-            if(RedPiecesOnColumn==0)
-                Points -= PieceColumnHoleValue;
-            if(BlackPiecesOnColumn==0)
-                Points += PieceColumnHoleValue;
+            if(board.redWin)
+                Points+=depth*WinValue;
+            if(board.blackWin)
+                Points-=depth*WinValue;
+            return Points;
+        } else if (playerColor == BLACK){
+            double Points=0;
+            int RemainingRedPieces = 0;
+            int RemainingBlackPieces = 0;
+
+            int gameBoard[][]=board.getBoard();
+            for(int j=0;j<gameBoard[0].length;j++) {
+                int BlackPiecesOnColumn = 0;
+                int RedPiecesOnColumn = 0;
+
+                for(int i=0;i<gameBoard.length;i++){
+                    if(gameBoard[i][j]==EMPTY)
+                        continue;
+                    if (gameBoard[i][j]==BLACK) {
+                        BlackPiecesOnColumn++;
+                        Points += GetPieceValue(gameBoard, i, j, playerColor);
+                        if (i == 7)
+                            board.blackWin = true;
+                        if (i == 0)
+                            Points += PieceHomeGroundValue;
+                    }
+                    else{
+                        RedPiecesOnColumn++;
+                        Points-= i*i*i;
+
+                        if (i == 0)
+                            board.redWin = true;
+                    }
+                    RemainingRedPieces+= RedPiecesOnColumn;
+                    RemainingBlackPieces+= BlackPiecesOnColumn;
+                }
+                if(BlackPiecesOnColumn==0)
+                    Points -= PieceColumnHoleValue;
+                if(RedPiecesOnColumn==0)
+                    Points += PieceColumnHoleValue;
+            }
+            Points+=10*RemainingBlackPieces-7*RemainingRedPieces;
+            if(board.redPieces==0)
+                board.blackWin=true;
+            if(board.redPieces==0)
+                board.redWin=true;
+            if(board.redWin)
+                Points-=depth*WinValue;
+            if(board.blackWin)
+                Points+=depth*WinValue;
+            return Points;
         }
-        Points+=10*RemainingRedPieces-7*RemainingBlackPieces;
-        if(board.blackPieces==0)
-            board.redWin=true;
-        if(board.blackPieces==0)
-            board.blackWin=true;
-
-        if(board.redWin)
-            Points+=depth*WinValue;
-        if(board.blackWin)
-            Points-=depth*WinValue;
-//        if(colorMoving==BLACK){
-//            board.value=-board.value;
-//        }
-        return Points;
+        return 0;
     }
 
-    public int GetPieceValue(int[][] board, int i, int j){
+    public int GetPieceValue(int[][] board, int i, int j, int playerColor){
         int value=(i*i)*PieceValue;
         int protectionValue=0;
         int attackValue=confirmAttackedValue(board,i,j);
@@ -239,37 +259,20 @@ public class Minmax {
             value+=PieceConnectionVValue;
         if(i<7 && i>0) {
             protectionValue = confirmprotectionValue(board, i, j);
-            value += (10-i)*protectionValue;
-        }
-
-
-        if(attackValue > 0 ) {
-            value -= attackValue;
-//            if (protectionValue < attackValue)
-//                value -= attackValue;
-        }else{
-            value+=100;
-            if(protectionValue !=0){
-                if(board[i][j]==RED){
-//                    if(i==1)
-//                        value+=PieceHighDangerValue;
-//                    else if(i==2)
-//                        value+=PieceDangerValue;
-                }else if(board[i][j]==BLACK){
-//                    if(i==6)
-//                        value+=PieceHighDangerValue;
-//                    else if(i==5)
-//                        value+=PieceDangerValue;
-                }
+            if (playerColor == RED){
+                value += (10-i)*protectionValue;
+            } else {
+                value += (i+3) * protectionValue;
             }
         }
 
-//        if(board[i][j]==BLACK)
-//            value+= i*PieceDangerValue;
-//        else
-//            value+= (8-i)*PieceDangerValue;
+        if(attackValue > 0 ) {
+            value -= attackValue;
+        }else{
+            value+=100;
+        }
 
-        return (int) value;
+        return value;
     }
 
     public boolean confirmHConnection(int[][] board, int i, int j){
