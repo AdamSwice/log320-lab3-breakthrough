@@ -221,7 +221,7 @@ public class Minmax {
                     }
                     else{
                         RedPiecesOnColumn++;
-                        Points-= i*i*i;
+                        Points-= (7-i)*(7-i)*(7-i);
 
                         if (i == 0)
                             board.redWin = true;
@@ -249,7 +249,12 @@ public class Minmax {
     }
 
     public int GetPieceValue(int[][] board, int i, int j, int playerColor){
-        int value=(i*i)*PieceValue;
+        int value =0;
+        if (playerColor == RED){
+            value=(i*i)*PieceValue;
+        } else {
+            value = (7-i)*(7-i)*PieceValue;
+        }
         int protectionValue=0;
         int attackValue=confirmAttackedValue(board,i,j);
 
