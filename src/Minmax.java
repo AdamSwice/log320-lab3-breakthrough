@@ -11,13 +11,13 @@ public class Minmax {
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
-    public final int WinValue = 50000;
-    public final short PieceColumnHoleValue = 250;
-    public final int PieceHomeGroundValue = 3000;
+    public final int WinValue = 500000;
+    public final short PieceColumnHoleValue = 200;
+    public final int PieceHomeGroundValue = 4000;
 
-    public final short AttackedPieceValue = 50;
-    public final short PieceValue = 50;
-    public final int PieceProtectionValue = 65;
+    public final short AttackedPieceValue = 125;
+    public final short PieceValue = 40;
+    public final int PieceProtectionValue = 50;
     public final int PieceConnectionVValue = 25;
     public final int PieceConnectionHValue = 40;
     /*
@@ -196,9 +196,9 @@ public class Minmax {
             board.blackWin = true;
 
         if (board.redWin)
-            Points += depth * WinValue;
+            Points += WinValue;// depth *
         if (board.blackWin)
-            Points -= depth * WinValue;
+            Points -=  WinValue;//depth *
 
         if(playerColor == BLACK) Points = (-1)*(Points);
 
@@ -209,11 +209,11 @@ public class Minmax {
     public int GetPieceValue(Board boardObject, int i, int j, int playerColor) {
         int value = 0;
         int board[][] = boardObject.getBoard();
-        boardObject.printBoard();
+        //boardObject.printBoard();
         if (playerColor == RED) {
-            value = (i + 1) * (i + 1) * PieceValue;
+            value = PieceValue;
         } else {
-             value = (8 - i) * (8 - i) * PieceValue;
+             value = PieceValue;
         }
         int protectionValue = 0;
         int attackValue = confirmAttackedValue(board, i, j);
@@ -225,9 +225,9 @@ public class Minmax {
         if (i < 7 && i > 0) {
             protectionValue = confirmprotectionValue(board, i, j);
             if (playerColor == RED) {
-                value += (10 - i) * protectionValue;
+                value += protectionValue;;//protectionValue 10 -i
             } else {
-                value += (i + 3) * protectionValue;
+                value += protectionValue; //;(i + 3) * protectionValue
             }
         }
 
@@ -278,22 +278,22 @@ public class Minmax {
         int protectionValue = 0;
         if (j > 0) {
             if (board[i][j] == RED) {
-                int protectedRow = i - 1 <= 0 ? 0 : i - 1;
+                int protectedRow = Math.max(i - 1, 0);
                 if (board[protectedRow][j - 1] == board[i][j])
                     protectionValue += i * PieceProtectionValue;
             } else if (board[i][j] == BLACK) {
-                int protectedRow = i + 1 >= 7 ? 7 : i + 1;
+                int protectedRow = Math.min(i + 1, 7);
                 if (board[protectedRow][j - 1] == board[i][j])
                     protectionValue += (7 - i) * PieceProtectionValue;
             }
         }
         if (j < 7) {
             if (board[i][j] == RED) {
-                int protectedRow = i - 1 <= 0 ? 0 : i - 1;
+                int protectedRow = Math.max(i - 1, 0);
                 if (board[protectedRow][j + 1] == board[i][j])
                     protectionValue += i * PieceProtectionValue;
             } else if (board[i][j] == BLACK) {
-                int protectedRow = i + 1 >= 7 ? 7 : i + 1;
+                int protectedRow = Math.min(i + 1, 7);
                 if (board[protectedRow][j + 1] == board[i][j])
                     protectionValue += (7 - i) * PieceProtectionValue;
             }
@@ -307,7 +307,7 @@ public class Minmax {
 
             if (board[i][j] == RED) {
                 if (i >= 0) {
-                    int attackersRow = i - 1 <= 0 ? 0 : i - 1;
+                    int attackersRow = Math.max(i - 1, 0);
                     if (board[attackersRow][j - 1] == BLACK && i == 1) {
                         attackedValue += i * WinValue;
                     } else if (board[attackersRow][j - 1] == BLACK && i == 7) {
@@ -318,7 +318,7 @@ public class Minmax {
                 }
             } else if (board[i][j] == BLACK) {
                 if (i <= 7) {
-                    int attackersRow = i + 1 >= 7 ? 7 : i + 1;
+                    int attackersRow = Math.min(i + 1, 7);
                     if (board[attackersRow][j - 1] == RED && i == 6) {
                         attackedValue += (7 - i) * WinValue;
                     } else if (board[attackersRow][j - 1] == RED && i == 0) {
@@ -333,7 +333,7 @@ public class Minmax {
         if (j < 7) {
             if (board[i][j] == RED) {
                 if (i >= 0) {
-                    int attackersRow = i - 1 <= 0 ? 0 : i - 1;
+                    int attackersRow = Math.max(i - 1, 0);
                     if (board[attackersRow][j + 1] == BLACK && i == 1) {
                         attackedValue += i * WinValue;
                     } else if (board[attackersRow][j + 1] == BLACK && i == 7) {
@@ -345,7 +345,7 @@ public class Minmax {
                 }
             } else if (board[i][j] == BLACK) {
                 if (i <= 7) {
-                    int attackersRow = i + 1 >= 7 ? 7 : i + 1;
+                    int attackersRow = Math.min(i + 1, 7);
                     if (board[attackersRow][j + 1] == RED && i == 6) {
                         attackedValue += (7 - i) * WinValue;
                     } else if (board[attackersRow][j + 1] == RED && i == 0) {
@@ -357,13 +357,5 @@ public class Minmax {
             }
         }
         return attackedValue;
-    }
-
-    public void updateBoard(Board boardObject) {
-        this.boardObject = boardObject;
-    }
-
-    public boolean onBoard(int i, int j) {
-        return i > 0 && i < 8 && j > 0 && j < 8;
     }
 }

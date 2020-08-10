@@ -168,17 +168,17 @@ public class Board {
 
     private void moveAndReturnBoard(int fromRow, int fromColumn, int toRow, int toColumn, int playerColor, Board tempBoard, ArrayList<Board> possibleMoves){
         if (isMoveValid(fromRow, fromColumn, toRow, toColumn, playerColor)){
-            if (toRow == 7 && tempBoard.AIColor!=BLACK){
+            if (toRow == 7 && playerColor==BLACK){
                 tempBoard.playerWin = true;
                 tempBoard.AIWin=false;
-            }else if(toRow == 7 && tempBoard.AIColor==BLACK){
+            }else if(toRow == 7 && playerColor==RED){
                 tempBoard.playerWin = false;
                 tempBoard.AIWin=true;
             }
-            if (toRow == 0 && tempBoard.AIColor!=BLACK){
+            if (toRow == 0 && playerColor==RED){
                 tempBoard.playerWin = true;
                 tempBoard.AIWin=false;
-            }else if(toRow == 0 && tempBoard.AIColor==BLACK){
+            }else if(toRow == 0 && playerColor==BLACK){
                 tempBoard.playerWin = false;
                 tempBoard.AIWin=true;
             }
@@ -188,6 +188,8 @@ public class Board {
             else if(tempBoard.getBoard()[toRow][toColumn]==RED && playerColor == BLACK) {
                 tempBoard.redPieces--;
             }
+             if(tempBoard.redPieces == 0) tempBoard.blackWin = true;
+            if(tempBoard.blackPieces == 0) tempBoard.redWin = true;
 
             tempBoard.modifyBoard(toRow,toColumn,getPieceAt(fromRow, fromColumn));
             tempBoard.modifyBoard(fromRow, fromColumn, EMPTY);
