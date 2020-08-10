@@ -13,7 +13,7 @@ public class Minmax {
     public final int EMPTY = 0;
     public final int WinValue = 500000;
     public final short PieceColumnHoleValue = 200;
-    public final int PieceHomeGroundValue = 4000;
+    public final int PieceHomeGroundValue = 1000;
 
     public final short AttackedPieceValue = 125;
     public final short PieceValue = 40;
@@ -137,7 +137,7 @@ public class Minmax {
             for (int i = 0; i < possibleMoves.size(); i++) {
                 tempBoard = possibleMoves.get(i);
 
-                double value = minimax(tempBoard, depth - 1, !currentPlayer, alpha, beta);
+                double value = minimax(tempBoard, depth - 1, currentPlayer, alpha, beta);
 
                 bestValue = Math.min(value, bestValue);
                 beta = Math.min(alpha, bestValue);
@@ -171,25 +171,24 @@ public class Minmax {
                 if (gameBoard[i][j] == RED) {
                     RedPiecesOnColumn++;
                     Points += GetPieceValue(board, i, j, RED);
-                    if (i == 0)
-                        board.redWin = true;
-                    if (i == 7)
-                        Points += PieceHomeGroundValue;
+                    if (i == 0) board.redWin = true;
+                    if (i == 7) Points += PieceHomeGroundValue;
                 } else {
                     BlackPiecesOnColumn++;
                     Points -= GetPieceValue(board, i, j, BLACK);
-                    if (i == 7)
-                        board.blackWin = true;
-                    if (i == 0)
-                        Points -= PieceHomeGroundValue;
+                    if (i == 7) board.blackWin = true;
+                    if (i == 0) Points -= PieceHomeGroundValue;
                 }
 
-                if (RedPiecesOnColumn == 0)
-                    Points -= PieceColumnHoleValue;
-                if (BlackPiecesOnColumn == 0)
-                    Points += PieceColumnHoleValue;
             }
+            if (RedPiecesOnColumn == 0)
+                Points -= PieceColumnHoleValue;
+
+            if (BlackPiecesOnColumn == 0)
+                Points += PieceColumnHoleValue;
+
         }
+
         if (board.blackPieces == 0)
             board.redWin = true;
         if (board.redPieces == 0)
@@ -198,9 +197,9 @@ public class Minmax {
         if (board.redWin)
             Points += WinValue;// depth *
         if (board.blackWin)
-            Points -=  WinValue;//depth *
+            Points -= WinValue;//depth *
 
-        if(playerColor == BLACK) Points = (-1)*(Points);
+        if (playerColor == BLACK) Points = (-1) * (Points);
 
         return Points;
     }
@@ -213,19 +212,22 @@ public class Minmax {
         if (playerColor == RED) {
             value = PieceValue;
         } else {
-             value = PieceValue;
+            value = PieceValue;
         }
         int protectionValue = 0;
         int attackValue = confirmAttackedValue(board, i, j);
 
-        if (confirmHConnection(board, i, j))
+        if (confirmHConnection(board, i, j)) {
             value += PieceConnectionHValue;
-        if (confirmVConnection(board, i, j))
+        }
+        if (confirmVConnection(board, i, j)) {
             value += PieceConnectionVValue;
+        }
         if (i < 7 && i > 0) {
             protectionValue = confirmprotectionValue(board, i, j);
             if (playerColor == RED) {
-                value += protectionValue;;//protectionValue 10 -i
+                value += protectionValue;
+                ;//protectionValue 10 -i
             } else {
                 value += protectionValue; //;(i + 3) * protectionValue
             }
