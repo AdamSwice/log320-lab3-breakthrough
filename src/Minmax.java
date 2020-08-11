@@ -4,44 +4,27 @@ import java.util.Random;
 
 public class Minmax {
     private int depth;
-    private double amountOfMovesCalled;
-    private int pruned = 0;
     private Board boardObject;
     private final int BOARDSIZE = 8;
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
     public final int WinValue = 500000;
-    public final short PieceColumnHoleValue = 200;
-    public final int PieceHomeGroundValue = 1000;
+    public final short PieceColumnHoleValue = 500;
+    public final int PieceHomeGroundValue = 8000;
 
-    public final short AttackedPieceValue = 125;
-    public final short PieceValue = 40;
-    public final int PieceProtectionValue = 50;
+    public final short AttackedPieceValue = 200;
+    public final short PieceValue = 5000;
+    public final int PieceProtectionValue = 150;
     public final int PieceConnectionVValue = 25;
     public final int PieceConnectionHValue = 40;
-    /*
-       public final int WinValue = 5000;
-    public final short PieceAlmostWinValue = 10;
-    public final short PieceDangerValue = 10;
-    public final short PieceHighDangerValue = 100;
-    public final short PieceColumnHoleValue = 200;
-    public final int PieceHomeGroundValue = 3000;
 
-    public final short AttackedPieceValue = 125;
-    public final short PieceValue = 40;
-    public final int PieceProtectionValue = 50;
-    public final int PieceConnectionVValue = 25;
-    public final int PieceConnectionHValue = 40;
-     */
 
     public Minmax(Board board, int depth) {
         this.boardObject = board;
         this.depth = depth;
     }
 
-    //TODO: fct qui kickstart l'algo de minmaxstart et qui dois retourner un string qui indique le move a faire une fois qu'on recoit
-    // l'état de board que l'algo a choisit.
     public String makeMove() {
         Utilitaire util = new Utilitaire("Output");
         int[][] newBoardState;
@@ -78,7 +61,6 @@ public class Minmax {
 
         for (int i = 0; i < possibleMoves.size(); i++) {
             Board tempBoard = possibleMoves.get(i);
-            //TODO:
 
             heuristic.add(minimax(tempBoard, depth - 1, !humanPlayer, alpha, beta));
         }
@@ -99,7 +81,6 @@ public class Minmax {
                 i--;
             }
         }
-        //TODO : renvoyer l'indexe de qui sera retourner dans l'heuristique
         return possibleMoves.get(random.nextInt(possibleMoves.size())).getBoard();
     }
 
@@ -150,8 +131,6 @@ public class Minmax {
     }
 
     private double getHeuristic(Board board, int depth, int playerColor) {
-        //TODO: doesnt make bad moves necessarily, but doesnt defend itself... WIP.
-
 
         return stategieDeff(board, depth, playerColor);
     }
@@ -227,9 +206,8 @@ public class Minmax {
             protectionValue = confirmprotectionValue(board, i, j);
             if (playerColor == RED) {
                 value += protectionValue;
-                ;//protectionValue 10 -i
             } else {
-                value += protectionValue; //;(i + 3) * protectionValue
+                value += protectionValue;
             }
         }
 

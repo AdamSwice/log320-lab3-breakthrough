@@ -11,7 +11,6 @@ public class Board {
     public final int BLACK = 2;
     public final int RED = 4;
     public final int EMPTY = 0;
-    public int value;
     public boolean redWin=false;
     public boolean blackWin=false;
     public boolean playerWin=false;
@@ -123,8 +122,6 @@ public class Board {
                 redPieces--;
             board[toRow][toColumn] = getPieceAt(fromRow, fromColumn);
             board[fromRow][fromColumn] = EMPTY;
-            //didIwin();
-            //TODO: voir si il faut mettre une methode qui determine si on a gagner
         }
     }
 
@@ -208,8 +205,6 @@ public class Board {
         return newBoard;
     }
 
-    //TODO: move attackedValue to makemoveandreturnboard pour filtrer.
-
     public int getPlayerType() {
         return playerType;
     }
@@ -228,7 +223,5 @@ public class Board {
     public void modifyBoard(int i,int j,int value){
         board[i][j]=value;
     }
-
-
 
 }
